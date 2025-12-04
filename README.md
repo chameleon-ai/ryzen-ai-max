@@ -9,6 +9,8 @@
     - [The Benchmark Code](#the-benchmark-code)
     - [Whisper Benchmark Results](#whisper-benchmark-results)
   - [Large Language Models](#large-language-models)
+    - [A Note on GPT OSS](#a-note-on-gpt-oss)
+    - [The Bottom Line](#the-bottom-line)
 
 # Setup
 My specific machine is the [Framework Desktop](https://frame.work/desktop) 128GB.
@@ -138,6 +140,15 @@ The initial tests using the gfx1151 nightly vary wildly, and in the case of the 
 
 ## Large Language Models
 
+I used [llama-bench](https://github.com/ggml-org/llama.cpp/blob/master/tools/llama-bench/README.md), a benchmark built in to [llama.cpp](https://github.com/ggml-org/llama.cpp). I'm specifically using the [llama.cpp-hip](https://aur.archlinux.org/packages/llama.cpp-hip) package from the AUR. While Whisper has a pytorch dependency, llama.cpp is a C++ executable that uses the system ROCm more directly.
+
+Running llama-bench is easy:
+```
+llama-bench -m model.gguf -d 0,128,256,512,768,1024,1536,2048,3072,4096,6144,8192 -ngl 999
+```
+- The `-d` argument specifies the amount of preloaded context to use. A range from 0 to 8196 is typical for most use cases, and context lengths greater than 8k caused problems for me when benchmarking on the 6800XT with 16GB VRAM.
+- The `-ngl 999` ensures that all layers get loaded to GPU. In the case of the 6800XT where not all layers can be loaded toA Note on GPT OSS GPU in all cases, this number is tweaked until the benchmark can run without OOMing.
+
 Below is the performance of [IceAbsintheNeatRP-7b](https://huggingface.co/mradermacher/IceAbsintheNeatRP-7b-GGUF), a 7B model that uses up to 9GB of VRAM.
 
 ![Performance of IceAbsinthe7b](/assets/iceabsinthe.png)
@@ -181,3 +192,11 @@ You would think this corresponds to file size and VRAM used, but not quite. The 
 ![Performance of GLM 4.6](/assets/glm46.png)
 
 (Of course there's no chance of me being able to run this massive model on the 6800XT, I don't have enough RAM+VRAM)
+
+### A Note on GPT OSS
+You may have noticed that GPT OSS 120b has drastically better performance than the other models. With the model size being about 60GB, it's roughly the same size as Anubis 70b Q6_K, but 10x faster. Well, GPT OSS is just built different and was designed with a new format called [MXFP4](https://huggingface.co/blog/RakshitAralimatti/learn-ai-with-me). While it's a fantastic breakthrough for running LLMs on consumer grade hardware, some benchmarks and advertisements for the AI Max 395+ (like the [Framework Desktop specs page]([https://frame.work/desktop?tab=machine-learning])) use GPT OSS benchmarks because the numbers look pretty good. But it doesn't tell the whole story for those interested all the other models out there.
+
+![Performance of all models on the 8060S](/assets/variousmodels.png)
+
+### The Bottom Line
+Personally, from just vibes running roleplay sessions on [koboldcpp](https://github.com/YellowRoseCx/koboldcpp-rocm/) with [sillytavern](https://docs.sillytavern.app/), models in the 24b range (up to Q8_0 quantization) feel the most comfortable and quantizations for 70b models feel sluggish even at the modest Q4 size. While the elimination of the VRAM bottleneck makes virtually every model better on the 8060S than my 6800XT with 16GB VRAM, in real terms it means that I'm able to upgrade from about 12b models (or low quality quantizations of 24b models) to 24b models at a good high quality quantization. I'm afraid that the 8060S GPU doesn't have the juice to run those 70b models fast enough for my taste.
