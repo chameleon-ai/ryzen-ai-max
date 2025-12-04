@@ -148,4 +148,20 @@ However, when running a [24B model](https://huggingface.co/mradermacher/Bereaved
 
 ![Performance of BereavedCompound24b](/assets/bereavedcompound.png)
 
-This shows us that the moment VRAM becomes a bottleneck, the power of the desktop GPU disappears. Here, the 8060S runs 8.7-6 tokens/s and the 6800XT runs 3.3-2.98. Note that faster performance is possible, but I offloaded enough layers to be able to fit 8192 tokens of context in VRAM.
+This shows us that the moment VRAM becomes a bottleneck, the power of the desktop GPU disappears. Here, the 8060S runs 8.7-6 tokens/s and the 6800XT runs 3.3-2.98. Note that faster performance on the 6800XT is possible, but I offloaded enough layers to be able to fit 8192 tokens of context in VRAM.
+
+In fact, we can see this drastic difference with [GPT-OSS-20b](https://huggingface.co/bartowski/openai_gpt-oss-20b-GGUF-MXFP4-Experimental)
+
+![Performance of GPT OSS 20b](/assets/oss20b.png)
+
+When loading all layers to the GPU, the 6800XT can only process up to 4096 tokens of context before running out of memory. With all layers on the GPU, the 6800XT could run 116-95 tokens/s, but once it had to offload a few layers to CPU, performance dipped drastically to 34-29 tokens/s. The 8060S splits the middle with 70-48 tokens/s.
+
+To illustrate this even further, we can see that the performance of the much more massive model [OSS 120b](https://huggingface.co/bartowski/openai_gpt-oss-120b-GGUF-MXFP4-Experimental) (63GB) on the 8060S runs faster than OSS 20b on the 6800XT.
+
+![GPT OSS 20b vs OSS 120b](/assets/oss20vs120.png)
+
+And for completeness, here's the benchmark for OSS 120b on both systems:
+
+![Performance of GPT OSS 120b](/assets/oss120b.png)
+
+The 6800XT runs 12.9-11.6 tokens/s while the 8060S runs 3-4x faster at 48-31.3 tokens/s. Note that I couldn't even run above 6144 tokens of context on the 6800XT, I simply ran out of memory on the whole system.
