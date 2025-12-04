@@ -194,7 +194,7 @@ You would think this corresponds to file size and VRAM used, but not quite. The 
 (Of course there's no chance of me being able to run this massive model on the 6800XT, I don't have enough RAM+VRAM)
 
 ### A Note on GPT OSS
-You may have noticed that GPT OSS 120b has drastically better performance than the other models. With the model size being about 60GB, it's roughly the same size as Anubis 70b Q6_K, but 10x faster. Well, GPT OSS is just built different and was designed with a new format called [MXFP4](https://huggingface.co/blog/RakshitAralimatti/learn-ai-with-me). While it's a fantastic breakthrough for running LLMs on consumer grade hardware, some benchmarks and advertisements for the AI Max 395+ (like the [Framework Desktop specs page]([https://frame.work/desktop?tab=machine-learning])) use GPT OSS benchmarks because the numbers look pretty good. But it doesn't tell the whole story for those interested all the other models out there.
+You may have noticed that GPT OSS 120b has drastically better performance than the other models. With the model size being about 60GB, it's roughly the same size as Anubis 70b Q6_K, but 10x faster. Well, GPT OSS is just built different and was designed with a new format called [MXFP4](https://huggingface.co/blog/RakshitAralimatti/learn-ai-with-me). While it's a fantastic breakthrough for running LLMs on consumer grade hardware, some benchmarks and advertisements for the AI Max 395+ (like the [Framework Desktop specs page](https://frame.work/desktop?tab=machine-learning)) use GPT OSS benchmarks because the numbers look pretty good. But it doesn't tell the whole story for those interested in all the other models out there.
 
 ![Performance of all models on the 8060S](/assets/variousmodels.png)
 
