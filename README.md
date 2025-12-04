@@ -1,10 +1,86 @@
-# The Framework Desktop w/ Ryzen AI Max+ 395
-
-Contents:
+# Contents:
+- [Setup](#setup)
+  - [Performance Tweaks](#performance-tweaks)
+    - [Update Grub Cmdline](#update-grub-cmdline)
+    - [Set CPU Scaling Governor](#set-cpu-scaling-governor)
+    - [Set Platform Profile](#set-platform-profile)
 - [Benchmarks](#benchmarks)
   - [Whisper Timestamped](#whisper-timestamped)
     - [The Benchmark Code](#the-benchmark-code)
     - [Whisper Benchmark Results](#whisper-benchmark-results)
+
+# Setup
+My specific machine is the [Framework Desktop](https://frame.work/desktop) 128GB.
+
+I've chosen to install [Arch Linux](https://archlinux.org/) in a headless configuration with no desktop environment. The [Arch wiki](https://wiki.archlinux.org/title/Framework_Desktop) is a good resource for setup steps specific to the Framework Desktop.
+
+## Performance Tweaks
+
+### Update Grub Cmdline:
+```
+GRUB_CMDLINE_LINUX_DEFAULT="loglevel=3 amd_iommu=off ttm.pages_limit=29360128 ttm.page_pool_size=29360128"
+```
+The `amd_iommu=off` is an optimization that is supposed to increase performance by a small amount, though I haven't personally seen a difference.\
+The `pages_limit` and `page_pool_size` set the ttm unified memory to advertise 112GB of available memory for allocation by the GPU.
+
+### Set CPU Scaling Governor
+Set the CPU [scaling governor](https://wiki.archlinux.org/title/CPU_frequency_scaling#Scaling_governors) to performance.
+
+There are several ways to do this, but a minimal configuration is to make a one-shot service that runs the command `cpupower frequency-set -g performance` on startup: Create the file `/etc/systemd/system/set-cpupower.service `:
+```
+[Unit]
+Description=Set cpu governor to performance
+After=sysinit.target
+
+[Service]
+Type=oneshot
+ExecStart=/bin/sh -c 'cpupower frequency-set -g performance'
+RemainAfterExit=yes
+
+[Install]
+WantedBy=multi-user.target
+```
+
+```
+sudo systemctl daemon-reload
+sudo systemctl enable --now set-cpupower.service
+```
+
+Verify that the governors are set by reading the `scaling_governor` file:\
+` sudo cat /sys/devices/system/cpu/cpu*/cpufreq/scaling_governor`
+
+Alternatively you can install the [cpupower](https://archlinux.org/packages/?name=cpupower) package to help manage it.
+
+### Set Platform Profile
+Set the `platform_profile` to performance.
+
+Like cpupower, I created a minimal startup script in `/etc/systemd/system/set-platform-profile.service`:
+```
+[Unit]
+Description=Set ACPI platform_profile to performance
+After=sysinit.target
+
+[Service]
+Type=oneshot
+ExecStart=/bin/sh -c 'echo performance > /sys/firmware/acpi/platform_profile'
+RemainAfterExit=yes
+
+[Install]
+WantedBy=multi-user.target
+```
+
+```
+sudo systemctl daemon-reload
+sudo systemctl enable --now set-platform-profile.service
+```
+
+Verify that it's set correctly: ` cat /sys/firmware/acpi/platform_profile
+`\
+The [amd-pstate](https://wiki.archlinux.org/title/CPU_frequency_scaling#amd_pstate) when running `cat /sys/devices/system/cpu/cpu*/cpufreq/scaling_driver` should report `amd-pstate-epp`
+
+Alternatively you can install the [power-profiles-daemon](https://archlinux.org/packages/extra/x86_64/power-profiles-daemon/)
+
+Once these are enabled, you should see max power usage exceed 100W.
 
 # Benchmarks
 
