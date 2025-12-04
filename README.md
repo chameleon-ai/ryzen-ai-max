@@ -174,7 +174,7 @@ The Q8_0 quantization runs from 2.97-2.08 tokens/s, Q4K_M runs from 4.5-2.6 toke
 
 For comparison, the 6800XT has bottomed out at about 1.5 tokens/s for the 43GB Q4K_M quantization of the model.
 
-![Performance of Anubis 70b](/assets/anubis70b.png)
+![Performance of Anubis 70b](/assets/anubis70b2.png)
 
 You would think this corresponds to file size and VRAM used, but not quite. The IQ2_S quant of Zai's [GLM 4.6](https://huggingface.co/unsloth/GLM-4.6-GGUF) uses up a whopping 102GB VRAM but runs 9.3-2.76 tokens/s, on par or faster than the 22GB IQ2_S Anubis quant.
 
