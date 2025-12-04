@@ -46,8 +46,10 @@ sudo systemctl daemon-reload
 sudo systemctl enable --now set-cpupower.service
 ```
 
-Verify that the governors are set by reading the `scaling_governor` file:\
-` sudo cat /sys/devices/system/cpu/cpu*/cpufreq/scaling_governor`
+Verify that the governors are set by reading the `scaling_governor` file:
+```
+sudo cat /sys/devices/system/cpu/cpu*/cpufreq/scaling_governor
+```
 
 Alternatively you can install the [cpupower](https://archlinux.org/packages/?name=cpupower) package to help manage it.
 
@@ -74,9 +76,16 @@ sudo systemctl daemon-reload
 sudo systemctl enable --now set-platform-profile.service
 ```
 
-Verify that it's set correctly: ` cat /sys/firmware/acpi/platform_profile
-`\
-The [amd-pstate](https://wiki.archlinux.org/title/CPU_frequency_scaling#amd_pstate) when running `cat /sys/devices/system/cpu/cpu*/cpufreq/scaling_driver` should report `amd-pstate-epp`
+Verify that it's set correctly:
+```
+cat /sys/firmware/acpi/platform_profile
+```
+
+Verify the [amd-pstate](https://wiki.archlinux.org/title/CPU_frequency_scaling#amd_pstate):
+```
+cat /sys/devices/system/cpu/cpu*/cpufreq/scaling_driver
+```
+It shouldshould report `amd-pstate-epp`
 
 Alternatively you can install the [power-profiles-daemon](https://archlinux.org/packages/extra/x86_64/power-profiles-daemon/)
 
