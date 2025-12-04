@@ -2,7 +2,8 @@
 
 Contents:
 - [Benchmarks](#benchmarks)
-  - [Whisper Timestamped](#Whisper-timestamped)
+  - [Whisper Timestamped](#whisper-timestamped)
+    - [The Benchmark Code](#the-benchmark-code)
 
 # Benchmarks
 
@@ -11,11 +12,13 @@ Contents:
 
 ### The Benchmark Code
 
-I've written [custom benchmark](/assets/transcribe-benchmark/transcribe.py) that you can run yourself.
+I've written a [custom benchmark](https://github.com/chameleon-ai/ryzen-ai-max/tree/main/assets/transcribe-benchmark) that you can run yourself.
 
 Steps to run:
-- make virtual environment (python 3.13)
-- Install torch\
+- Download the [script](/assets/transcribe-benchmark/transcribe.py) as well as the .opus files in the directory (or use your own audio files if you like!)
+- make virtual environment (python 3.13):\
+`python -m venv venv`
+- Install torch:\
 `pip install --pre torch torchvision torchaudio --index-url https://rocm.nightlies.amd.com/v2/gfx1151/`\
 or\
 `pip3 install --pre torch torchvision --index-url https://download.pytorch.org/whl/nightly/rocm7.1`
