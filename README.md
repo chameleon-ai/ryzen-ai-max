@@ -8,6 +8,7 @@
   - [Whisper Timestamped](#whisper-timestamped)
     - [The Benchmark Code](#the-benchmark-code)
     - [Whisper Benchmark Results](#whisper-benchmark-results)
+  - [Large Language Models](#large-language-models)
 
 # Setup
 My specific machine is the [Framework Desktop](https://frame.work/desktop) 128GB.
@@ -85,7 +86,7 @@ Verify the [amd-pstate](https://wiki.archlinux.org/title/CPU_frequency_scaling#a
 ```
 cat /sys/devices/system/cpu/cpu*/cpufreq/scaling_driver
 ```
-It shouldshould report `amd-pstate-epp`
+It should report `amd-pstate-epp`
 
 Alternatively you can install the [power-profiles-daemon](https://archlinux.org/packages/extra/x86_64/power-profiles-daemon/)
 
@@ -134,3 +135,17 @@ Note that Pytorch + ROCm version matters. Below are benchmarks all on the 8060S 
 ![Performance based on rocm install](/assets/whisper2.png)
 
 The initial tests using the gfx1151 nightly vary wildly, and in the case of the 1 minute test, transcription takes longer than real-time, which is abysmal performance. Once changing to 7.1 the results are on average 25% faster and much more consistent.
+
+## Large Language Models
+
+Below is the performance of [IceAbsintheNeatRP-7b](https://huggingface.co/mradermacher/IceAbsintheNeatRP-7b-GGUF), a 7B model that uses up to 9GB of VRAM.
+
+![Performance of IceAbsinthe7b](/assets/iceabsinthe.png)
+
+The 8060S runs from 27-13 tokens/s depending on context length, with the 6800XT coming in at 52-27, just about twice as fast.
+
+However, when running a [24B model](https://huggingface.co/mradermacher/BereavedCompound-v1.0-24b-GGUF) that the 6800XT's 16GB VRAM can't handle, the performance is flipped:
+
+![Performance of BereavedCompound24b](/assets/bereavedcompound.png)
+
+This shows us that the moment VRAM becomes a bottleneck, the power of the desktop GPU disappears. Here, the 8060S runs 8.7-6 tokens/s and the 6800XT runs 3.3-2.98. Note that faster performance is possible, but I offloaded enough layers to be able to fit 8192 tokens of context in VRAM.
