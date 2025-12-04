@@ -165,3 +165,19 @@ And for completeness, here's the benchmark for OSS 120b on both systems:
 ![Performance of GPT OSS 120b](/assets/oss120b.png)
 
 The 6800XT runs 12.9-11.6 tokens/s while the 8060S runs 3-4x faster at 48-31.3 tokens/s. Note that I couldn't even run above 6144 tokens of context on the 6800XT, I simply ran out of memory on the whole system.
+
+Quantization type and size matters. Below is the performance of a handful of different quantizations of [Anubis 70b](https://huggingface.co/bartowski/TheDrummer_Anubis-70B-v1.1-GGUF) on the 8060S.
+
+![Performance of Anubis 70b](/assets/anubis70b.png)
+
+The Q8_0 quantization runs from 2.97-2.08 tokens/s, Q4K_M runs from 4.5-2.6 tokens/s, and the relatively tiny IQ2_S runs 7.7-3.5 tokens/s.
+
+For comparison, the 6800XT has bottomed out at about 1.5 tokens/s for the 43GB Q4K_M quantization of the model.
+
+![Performance of Anubis 70b](/assets/anubis70b.png)
+
+You would think this corresponds to file size and VRAM used, but not quite. The IQ2_S quant of Zai's [GLM 4.6](https://huggingface.co/unsloth/GLM-4.6-GGUF) uses up a whopping 102GB VRAM but runs 9.3-2.76 tokens/s, on par or faster than the 22GB IQ2_S Anubis quant.
+
+![Performance of GLM 4.6](/assets/glm46.png)
+
+(Of course there's no chance of me being able to run this massive model on the 6800XT, I don't have enough RAM+VRAM)
