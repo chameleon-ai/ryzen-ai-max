@@ -11,6 +11,7 @@
   - [Large Language Models](#large-language-models)
     - [A Note on GPT OSS](#a-note-on-gpt-oss)
     - [The Bottom Line](#the-bottom-line)
+  - [SDXL](#sdxl)
 
 # Setup
 My specific machine is the [Framework Desktop](https://frame.work/desktop) 128GB.
@@ -194,9 +195,46 @@ You would think this corresponds to file size and VRAM used, but not quite. The 
 (Of course there's no chance of me being able to run this massive model on the 6800XT, I don't have enough RAM+VRAM)
 
 ### A Note on GPT OSS
-You may have noticed that GPT OSS 120b has drastically better performance than the other models. With the model size being about 60GB, it's roughly the same size as Anubis 70b Q6_K, but 10x faster. Well, GPT OSS is just built different and was designed with a new format called [MXFP4](https://huggingface.co/blog/RakshitAralimatti/learn-ai-with-me). While it's a fantastic breakthrough for running LLMs on consumer grade hardware, some benchmarks and advertisements for the AI Max 395+ (like the [Framework Desktop specs page](https://frame.work/desktop?tab=machine-learning)) use GPT OSS benchmarks because the numbers look pretty good. But it doesn't tell the whole story for those interested in all the other models out there.
+You may have noticed that GPT OSS 120b has drastically better performance than the other models. With the model size being about 60GB, it's roughly the same size as Anubis 70b Q6_K, but 10x faster. Well, GPT OSS is just built different and was designed with a new format called [MXFP4](https://huggingface.co/blog/RakshitAralimatti/learn-ai-with-me). While it's a fantastic breakthrough for running LLMs on consumer grade hardware, I find it a bit misleading that some benchmarks and advertisements for the AI Max 395+ (like the [Framework Desktop specs page](https://frame.work/desktop?tab=machine-learning)) use GPT OSS benchmarks because the numbers look pretty good. It doesn't tell the whole story for those interested in all the other models out there.
 
 ![Performance of all models on the 8060S](/assets/variousmodels.png)
 
 ### The Bottom Line
 Personally, from just vibes running roleplay sessions on [koboldcpp](https://github.com/YellowRoseCx/koboldcpp-rocm/) with [sillytavern](https://docs.sillytavern.app/), models in the 24b range (up to Q8_0 quantization) feel the most comfortable and quantizations for 70b models feel sluggish even at the modest Q4 size. While the elimination of the VRAM bottleneck makes virtually every model better on the 8060S than my 6800XT with 16GB VRAM, in real terms it means that I'm able to upgrade from about 12b models (or low quality quantizations of 24b models) to 24b models at a good high quality quantization. I'm afraid that the 8060S GPU doesn't have the juice to run those 70b models fast enough for my taste.
+
+## SDXL
+I've created a [simple workflow](/assets/sdxl-benchmark.json) for [ComfyUI](https://github.com/comfyanonymous/ComfyUI) that I used for this benchmark. It's intentionally simple, uses no custom nodes, and is designed to measure SDXL performace when processing large resolutions.
+
+![SDXL Benchmark Workflow](/assets/sdxl-workflow.png)
+
+If you'd like to run this benchmark for yourself, you can use any SDXL model you like. I used [TSRMix 4.0](https://civitai.com/models/2013051?modelVersionId=2395079). Note that the workflow also uses the [SDXL VAE](https://huggingface.co/stabilityai/sdxl-vae) separate from the model.
+
+I did 3 different benchmarks and averaged the generation times with 5 samples each:
+- Generate the base 1024x1024 image
+- Generate base and upscale by 1.5x (1536x1536)
+- Generate base and upscale by 2x (2048x2048)
+
+Each test was run with 36 steps.
+
+![SDXL Benchmark Workflow](/assets/sdxl-workflow2.png)
+
+When running on the 6800XT, we can see in the console that CPU offloading kicks in:
+```
+loaded completely; 13153.05 MB usable, 4897.05 MB loaded, full load: True
+```
+
+The VAE decoder doesn't like the VRAM limitations either:
+```
+Warning: Ran out of memory when regular VAE decoding, retrying with tiled VAE decoding.
+
+```
+
+As we've learned from the LLM benchmarks, it should be no surprise that once the 6800XT runs out of VRAM, we would expect to see no performance advantage over the 8060S, and indeed that holds true for SDXL:
+
+![SDXL Benchmark](/assets/sdxl-benchmark.png)
+
+- For base image generation at 1024x1024, the 6800XT and 8060S are break-even with average gen times of 24.95 and 23.94 seconds respectively. The reported it/s are 1.53 and 1.57 respectively.
+- For 1.5x latent upscale, the 8060S is regularly 20 seconds faster at an average of 83.3 seconds vs 101.2 seconds on the 6800XT
+- For 2x latent upscale, the 8060S completes in 154.46 seconds, and it runs laps around the 6800XT which takes a whopping 339.74 seconds.
+
+I must say that I'm surprised by this. When I bought the computer, I didn't expect it to be a complete replacement for generating SDXL images, but the VRAM bottleneck on the 6800XT was tighter than I expected.
