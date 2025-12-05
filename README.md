@@ -13,6 +13,8 @@
     - [The Bottom Line](#the-bottom-line)
   - [SDXL](#sdxl)
   - [Z Image](#z-image)
+- [Other Notes](#other-notes)
+  - [Koboldcpp Settings](#koboldcpp-settings)
 
 # Setup
 My specific machine is the [Framework Desktop](https://frame.work/desktop) 128GB.
@@ -243,7 +245,7 @@ I must say that I'm surprised by this. When I bought the computer, I didn't expe
 ## Z Image
 Alright, SDXL is old technology, it's had its day. I'm told [Z-image](https://huggingface.co/Tongyi-MAI/Z-Image-Turbo) is the future. It's designed to run on 16GB GPUs, after all.
 
-I used the [stock z-image-turbo](https://blog.comfy.org/p/z-image-turbo-in-comfyui-realism) workflow as of Dec 4 2025. I simply ran the example at 8 steps, 9 steps, and 12 steps. I took an average of 6 runs each.
+I used the [stock z-image-turbo](https://blog.comfy.org/p/z-image-turbo-in-comfyui-realism) workflow as of Dec 4 2025. I simply ran the example at 8 steps, 9 steps, and 12 steps, taking an average of 6 runs each.
 
 At first, it looks reassuring. Main KSampler inference is using right up to the VRAM limit with no CPU offloading:
 
@@ -265,3 +267,12 @@ And I believe this is what causes the 6800XT to lose time where it should otherw
 | 12 | 43.39 | 29.06 |
 
 Another win for the 8060S.
+
+# Other Notes
+
+## Koboldcpp Settings
+- Use [koboldcpp-rocm](https://github.com/YellowRoseCx/koboldcpp-rocm), build from source or install the [koboldcpp-hipblas](https://aur.archlinux.org/packages/koboldcpp-hipblas) package from the AUR
+- Use `--usecublas` or `--usecublas mmq` (I'm not sure if there's a difference). The `--usevulkan` option is much slower, don't recommend.
+- Use `--blasbatchsize 4096`. When processing your prompt, there are 2 stages: Prompt processing, and token generation. In the first stage, all context has to be processed before new tokens get generated. By default this can take quite some time. A high`--blasbatchsize` can process the whole context all at once and significantly speeds up the experience. 4096 is the max batch size allowed and if you keep your context limited to 4096 (`--contextsize 4096`) everything will always process in one batch.
+- Use `--gpulayers 999` to ensure all layers are offloaded to GPU. The auto selection sometimes doesn't want to load all layers, especially on larger models.
+- If you're not sure of a setting, use the `--benchmark` option to get a quick idea of how things will perform 
