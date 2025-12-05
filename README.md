@@ -12,6 +12,7 @@
     - [A Note on GPT OSS](#a-note-on-gpt-oss)
     - [The Bottom Line](#the-bottom-line)
   - [SDXL](#sdxl)
+  - [Z Image](#z-image)
 
 # Setup
 My specific machine is the [Framework Desktop](https://frame.work/desktop) 128GB.
@@ -238,3 +239,29 @@ As we've learned from the LLM benchmarks, it should be no surprise that once the
 - For 2x latent upscale, the 8060S completes in 154.46 seconds, and it runs laps around the 6800XT which takes a whopping 339.74 seconds.
 
 I must say that I'm surprised by this. When I bought the computer, I didn't expect it to be a complete replacement for generating SDXL images, but the VRAM bottleneck on the 6800XT was tighter than I expected.
+
+## Z Image
+Alright, SDXL is old technology, it's had its day. I'm told [Z-image](https://huggingface.co/Tongyi-MAI/Z-Image-Turbo) is the future. It's designed to run on 16GB GPUs, after all.
+
+I used the [stock z-image-turbo](https://blog.comfy.org/p/z-image-turbo-in-comfyui-realism) workflow as of Dec 4 2025. I simply ran the example at 8 steps, 9 steps, and 12 steps. I took an average of 6 runs each.
+
+At first, it looks reassuring. Main KSampler inference is using right up to the VRAM limit with no CPU offloading:
+
+![Z-Image Btop Usage](/assets/z-image-btop.png)
+
+However, the console prints this out when performing VAE decode:
+```
+loaded partially; 11288.08 MB usable, 11259.95 MB loaded, 479.60 MB offloaded, 28.12 MB buffer reserved, lowvram patches: 0
+```
+
+And I believe this is what causes the 6800XT to lose time where it should otherwise be faster. I always knew vae decoding was a memory heavy process, but I underestimated the VRAM bottleneck effect.
+
+![Z-Image Benchmark](/assets/z-image-benchmark.png)
+
+| Steps | 6800XT time (seconds) | 8060S time (seconds) |
+| ----------- | ----------- | ----------- |
+| 8 | 30.96 | 19.3 |
+| 9 | 34.14 | 21.69 |
+| 12 | 43.39 | 29.06 |
+
+Another win for the 8060S.
