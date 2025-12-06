@@ -32,15 +32,15 @@ GRUB_CMDLINE_LINUX_DEFAULT="loglevel=3 amd_iommu=off ttm.pages_limit=29360128 tt
 
 sudo grub-mkconfig -o /boot/grub/grub.cfg
 ```
-- The `amd_iommu=off` is an optimization that is supposed to increase performance by a small amount, though I haven't personally seen a difference.\
+- The `amd_iommu=off` is an optimization that is supposed to increase performance by a small amount, though I haven't personally seen a difference.
 - The `pages_limit` and `page_pool_size` set the ttm unified memory to advertise 112GB of available memory for allocation by the GPU.
-- Multiply desired GB by 262144. Set to 31457280 for a 120GB limit.
+- Multiply desired GB by 262144. Set to 31457280 for a 120GB limit. However, I don't recommend setting it higher than 112GB as it causes the system to become unstable in my experience.
 
 Verify that the memory is reported correctly:
 ```
 sudo dmesg | grep "amdgpu.*memory"
 [    3.612993] amdgpu 0000:c3:00.0: amdgpu: amdgpu: 512M of VRAM memory ready
-[    3.612996] amdgpu 0000:c3:00.0: amdgpu: amdgpu: 122880M of GTT memory ready.
+[    3.612996] amdgpu 0000:c3:00.0: amdgpu: amdgpu: 114688M of GTT memory ready.
 
 ```
 
