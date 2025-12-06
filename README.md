@@ -221,10 +221,14 @@ Each test was run with 36 steps.
 
 ![SDXL Benchmark Workflow](/assets/sdxl-workflow2.png)
 
-When running on the 6800XT, we can see in the console that CPU offloading kicks in:
+When running on the 6800XT, a message appears that isn't printed on the 8060S:
 ```
 loaded completely; 13153.05 MB usable, 4897.05 MB loaded, full load: True
 ```
+
+And we can see that even though GPU utilization is high, VRAM usage isn't as much as it should be, suggesting that ComfyUI's memory management is kicking in:
+ 
+![SDXL Btop GPU Usage](/assets/sdxl-btop.png)
 
 The VAE decoder doesn't like the VRAM limitations either:
 ```
@@ -271,8 +275,9 @@ Another win for the 8060S.
 # Other Notes
 
 ## Koboldcpp Settings
-- Use [koboldcpp-rocm](https://github.com/YellowRoseCx/koboldcpp-rocm), build from source or install the [koboldcpp-hipblas](https://aur.archlinux.org/packages/koboldcpp-hipblas) package from the AUR
-- Use `--usecublas` or `--usecublas mmq` (I'm not sure if there's a difference). The `--usevulkan` option is much slower, don't recommend.
+- Use [koboldcpp-rocm](https://github.com/YellowRoseCx/koboldcpp-rocm), build from source or install the [koboldcpp-hipblas](https://aur.archlinux.org/packages/koboldcpp-hipblas) AUR package
+- Use `--usecublas` or `--usecublas mmq` (I'm not sure if there's a difference)
+  - The `--usevulkan` option is much slower, don't recommend.
 - Use `--blasbatchsize 4096`. When processing your prompt, there are 2 stages: Prompt processing, and token generation. In the first stage, all context has to be processed before new tokens get generated. By default this can take quite some time. A high`--blasbatchsize` can process the whole context all at once and significantly speeds up the experience. 4096 is the max batch size allowed and if you keep your context limited to 4096 (`--contextsize 4096`) everything will always process in one batch.
 - Use `--gpulayers 999` to ensure all layers are offloaded to GPU. The auto selection sometimes doesn't want to load all layers, especially on larger models.
 - If you're not sure of a setting, use the `--benchmark` option to get a quick idea of how things will perform 
