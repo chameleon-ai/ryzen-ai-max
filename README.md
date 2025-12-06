@@ -24,11 +24,26 @@ I've chosen to install [Arch Linux](https://archlinux.org/) in a headless config
 ## Performance Tweaks
 
 ### Update Grub Cmdline:
+
 ```
+sudo nano /etc/default/grub
+
 GRUB_CMDLINE_LINUX_DEFAULT="loglevel=3 amd_iommu=off ttm.pages_limit=29360128 ttm.page_pool_size=29360128"
+
+sudo grub-mkconfig -o /boot/grub/grub.cfg
 ```
-The `amd_iommu=off` is an optimization that is supposed to increase performance by a small amount, though I haven't personally seen a difference.\
-The `pages_limit` and `page_pool_size` set the ttm unified memory to advertise 112GB of available memory for allocation by the GPU.
+- The `amd_iommu=off` is an optimization that is supposed to increase performance by a small amount, though I haven't personally seen a difference.\
+- The `pages_limit` and `page_pool_size` set the ttm unified memory to advertise 112GB of available memory for allocation by the GPU.
+- Multiply desired GB by 262144. Set to 31457280 for a 120GB limit.
+
+Verify that the memory is reported correctly:
+```
+sudo dmesg | grep "amdgpu.*memory"
+[    3.612993] amdgpu 0000:c3:00.0: amdgpu: amdgpu: 512M of VRAM memory ready
+[    3.612996] amdgpu 0000:c3:00.0: amdgpu: amdgpu: 122880M of GTT memory ready.
+
+```
+
 
 ### Set CPU Scaling Governor
 Set the CPU [scaling governor](https://wiki.archlinux.org/title/CPU_frequency_scaling#Scaling_governors) to performance.
@@ -136,7 +151,7 @@ Note: A value of 1 denotes that the model takes 1 second to process 1 second of 
 
 We can see that all of the desktop GPUs handily outperform the 8060S, with the modest 6750XT being roughly twice as fast.
 
-Note that Pytorch + ROCm version matters. Below are benchmarks all on the 8060S from [gfx1151](https://rocm.nightlies.amd.com/v2/gfx1151/) nightly (Nov 28 2025) and [rocm 7.1](https://download.pytorch.org/whl/nightly/rocm7.1) nightly (Dec 2 2025). As of the time of writing, the latest stable pytorch + ROCm release is still 6.4, so it's possible that 7.1 will continue to gain performance improvements in the future.
+Note that Pytorch + ROCm version matters. Below are benchmarks all on the 8060S from [gfx1151](https://rocm.nightlies.amd.com/v2/gfx1151/) nightly (Nov 28 2025) and [rocm 7.1](https://download.pytorch.org/whl/nightly/rocm7.1) nightly (`2.10.0.dev20251124+rocm7.1`). As of the time of writing, the latest stable pytorch + ROCm release is still 6.4, so it's possible that 7.1 will continue to gain performance improvements in the future.
 
 ![Performance based on rocm install](/assets/whisper2.png)
 
@@ -245,6 +260,8 @@ As we've learned from the LLM benchmarks, it should be no surprise that once the
 - For 2x latent upscale, the 8060S completes in 154.46 seconds, and it runs laps around the 6800XT which takes a whopping 339.74 seconds.
 
 I must say that I'm surprised by this. When I bought the computer, I didn't expect it to be a complete replacement for generating SDXL images, but the VRAM bottleneck on the 6800XT was tighter than I expected.
+
+For the record, this benchmark was done on `pytorch 2.10.0.dev20251124+rocm7.1`
 
 ## Z Image
 Alright, SDXL is old technology, it's had its day. I'm told [Z-image](https://huggingface.co/Tongyi-MAI/Z-Image-Turbo) is the future. It's designed to run on 16GB GPUs, after all.
