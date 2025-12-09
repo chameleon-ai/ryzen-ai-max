@@ -28,13 +28,14 @@ I've chosen to install [Arch Linux](https://archlinux.org/) in a headless config
 ```
 sudo nano /etc/default/grub
 
-GRUB_CMDLINE_LINUX_DEFAULT="loglevel=3 amd_iommu=off ttm.pages_limit=29360128 ttm.page_pool_size=29360128"
+GRUB_CMDLINE_LINUX_DEFAULT="loglevel=3 amd_iommu=off ttm.pages_limit=29360128 ttm.page_pool_size=29360128 amdgpu.cwsr_enable=0"
 
 sudo grub-mkconfig -o /boot/grub/grub.cfg
 ```
 - The `amd_iommu=off` is an optimization that is supposed to increase performance by a small amount, though I haven't personally seen a difference.
 - The `pages_limit` and `page_pool_size` set the ttm unified memory to advertise 112GB of available memory for allocation by the GPU.
 - Multiply desired GB by 262144. Set to 31457280 for a 120GB limit. However, I don't recommend setting it higher than 112GB as it causes the system to become unstable in my experience.
+- `amdgpu.cwsr_enable=0` is a [workaround](https://github.com/ROCm/TheRock/issues/1795) that appears to make ROCm 7.1 more stable, alleviating a bug that causes crashes due to illegal memory access
 
 Verify that the memory is reported correctly:
 ```
