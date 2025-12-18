@@ -13,6 +13,8 @@
     - [The Bottom Line](#the-bottom-line)
   - [SDXL](#sdxl)
   - [Z Image](#z-image)
+- [Wan](#wan)
+  - [A note on the full fp16 weights](#a-note-on-the-full-fp16-weights)
 - [Other Notes](#other-notes)
   - [Koboldcpp Settings](#koboldcpp-settings)
 
@@ -185,7 +187,7 @@ In fact, we can see this drastic difference with [GPT-OSS-20b](https://huggingfa
 
 ![Performance of GPT OSS 20b](/assets/oss20b.png)
 
-When loading all layers to the GPU, the 6800XT can only process up to 4096 tokens of context before running out of memory. With all layers on the GPU, the 6800XT could run 116-95 tokens/s, but once it had to offload a few layers to CPU, performance dipped drastically to 34-29 tokens/s. The 8060S splits the middle with 70-48 tokens/s.
+When loading all layers to the GPU, the 6800XT can only process up to 4096 tokens of context before running out of memory. With al![Z-Image Benchmark](/assets/z-image-benchmark.png)l layers on the GPU, the 6800XT could run 116-95 tokens/s, but once it had to offload a few layers to CPU, performance dipped drastically to 34-29 tokens/s. The 8060S splits the middle with 70-48 tokens/s.
 
 To illustrate this even further, we can see that the performance of the much more massive model [OSS 120b](https://huggingface.co/bartowski/openai_gpt-oss-120b-GGUF-MXFP4-Experimental) (63GB) on the 8060S runs faster than OSS 20b on the 6800XT.
 
@@ -289,6 +291,33 @@ And I believe this is what causes the 6800XT to lose time where it should otherw
 | 12 | 43.39 | 29.06 |
 
 Another win for the 8060S.
+
+## Wan
+
+I used [a custom workflow](/assets/wan-i2v-benchmark.json) which is based on the stock i2v workflow using the [lightxv 4 steps lora](https://huggingface.co/Comfy-Org/Wan_2.2_ComfyUI_Repackaged/tree/main/split_files/loras) and adds in [Qwen-VL](https://github.com/1038lab/ComfyUI-QwenVL) to caption the image input. Note that this adds approximately 40 seconds to total generation time. I chose to include it in the benchmark since this is how I intend to use i2v. I took the average of 6 runs for each resolution. Let's take a look at the performance on the 8060S:
+
+![Wan i2v benchmark](/assets/wan-i2v-benchmark.png)
+
+| Resolution | fp16 | fp8 | Q4K_M |
+| ----------- | ----------- | ----------- | ----------- |
+| 544x360 | 8.46 | 4.93 | 4.09 |
+| 640x432 | 13.21 | 9.71 | 4.48 |
+| 720x480 | 20.94 | 15.87 | 15.65 |
+| 768x512 | 19.49 | 17.22 | 17.64 |
+| 816x544 | 31.6 | 27.88 | 27.54 |
+| 864x576 | 39.75 | 35.81 | 35.88 |
+| 960x648 | 62.25 | 57.5 | 47.35 |
+
+On average the fp8 is 3.8 minutes faster than fp16. For most resolutions, fp8 and Q4K_M are a virtual tie, so it's a no-brainer to go with the higher quality fp8. At least on fp16 it seems like 768x512 is a magic resolution that runs faster than 720x480. After that, inference time grows exponentially, and considering that 2x upscaling is decent at this resolution, it seems to be a good sweet spot. For fun I tried 1440x972 and the fp8 took 10 hours to complete. I had the VRAM to do it but I don't recommend it.
+
+My 6800XT balked at the Qwen-VL node (even the 2B version) so I disabled it and reran the benchmark for a few select resolutions for an apples-to-apples comparison with the Q4K_M [gguf](https://huggingface.co/calcuis/wan2-gguf) quantization:
+
+![Wan i2v benchmark 2](/assets/wan-i2v-benchmark2.png)
+
+Surprising results. 544x360 is a tie, 6800XT is 7 minutes faster for 720x480, and 22 minutes faster for 864x576.
+
+### A note on the full fp16 weights
+While running i2v with the full size models, I observed an issue where memory accumulated over time and never got released even after inference was complete. Eventually, this would cause the system to OOM. This problem didn't happen with the fp8 version. Unknown if it's an issue with experimental ROCm 7.1 or an issue with ComfyUI.
 
 # Other Notes
 
