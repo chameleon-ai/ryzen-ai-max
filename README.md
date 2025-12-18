@@ -169,7 +169,7 @@ Running llama-bench is easy:
 llama-bench -m model.gguf -d 0,128,256,512,768,1024,1536,2048,3072,4096,6144,8192 -ngl 999
 ```
 - The `-d` argument specifies the amount of preloaded context to use. A range from 0 to 8196 is typical for most use cases, and context lengths greater than 8k caused problems for me when benchmarking on the 6800XT with 16GB VRAM.
-- The `-ngl 999` ensures that all layers get loaded to GPU. In the case of the 6800XT where not all layers can be loaded toA Note on GPT OSS GPU in all cases, this number is tweaked until the benchmark can run without OOMing.
+- The `-ngl 999` ensures that all layers get loaded to GPU. In the case of the 6800XT where not all layers can be loaded to GPU, this number is tweaked until the benchmark can run without OOMing.
 
 Below is the performance of [IceAbsintheNeatRP-7b](https://huggingface.co/mradermacher/IceAbsintheNeatRP-7b-GGUF), a 7B model that uses up to 9GB of VRAM.
 
@@ -187,7 +187,7 @@ In fact, we can see this drastic difference with [GPT-OSS-20b](https://huggingfa
 
 ![Performance of GPT OSS 20b](/assets/oss20b.png)
 
-When loading all layers to the GPU, the 6800XT can only process up to 4096 tokens of context before running out of memory. With al![Z-Image Benchmark](/assets/z-image-benchmark.png)l layers on the GPU, the 6800XT could run 116-95 tokens/s, but once it had to offload a few layers to CPU, performance dipped drastically to 34-29 tokens/s. The 8060S splits the middle with 70-48 tokens/s.
+When loading all layers to the GPU, the 6800XT can only process up to 4096 tokens of context before running out of memory. With all layers on the GPU, the 6800XT could run 116-95 tokens/s, but once it had to offload a few layers to CPU, performance dipped drastically to 34-29 tokens/s. The 8060S splits the middle with 70-48 tokens/s.
 
 To illustrate this even further, we can see that the performance of the much more massive model [OSS 120b](https://huggingface.co/bartowski/openai_gpt-oss-120b-GGUF-MXFP4-Experimental) (63GB) on the 8060S runs faster than OSS 20b on the 6800XT.
 
