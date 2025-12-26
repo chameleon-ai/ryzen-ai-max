@@ -16,6 +16,11 @@
 - [Wan](#wan)
   - [A note on the full fp16 weights](#a-note-on-the-full-fp16-weights)
 - [Other Notes](#other-notes)
+  - [Rsync](#rsync)
+  - [ComfyUI Workflows](#comfyui-workflows)
+    - [Wan i2v](#wan-i2v)
+    - [Refine by Segment](#refine-by-segment)
+    - [NetaYume Lumina](#netayume-lumina)
   - [Koboldcpp Settings](#koboldcpp-settings)
 
 # Setup
@@ -320,6 +325,45 @@ Surprising results. 544x360 is a tie, 6800XT is 7 minutes faster for 720x480, an
 While running i2v with the full size models, I observed an issue where memory accumulated over time and never got released even after inference was complete. Eventually, this would cause the system to OOM. This problem didn't happen with the fp8 version. Unknown if it's an issue with experimental ROCm 7.1 or an issue with ComfyUI.
 
 # Other Notes
+
+## Rsync
+Since I set it up to act as a remote server, I created an alias on my local machine's `.bashrc` to sync with ComfyUI's outputs:
+```
+alias frameworksync='rsync -azP 192.168.1.151:/media/nvme1/ComfyUI/output/ /media/ironwolf1/framework-output'
+
+```
+
+## ComfyUI Workflows
+
+Check out these various custom [workflows](https://github.com/chameleon-ai/ryzen-ai-max/tree/main/assets/workflows) that take advantage of the virtually unlimited memory of the AI Max.
+
+### Wan i2v
+
+![i2v workflow](/assets/workflows/i2v.png)
+
+[Wan 2.2 i2v workflow](/workflows/framework-wan-i2v.json)
+- Uses the fp8 weights of [Wan 2.2](https://huggingface.co/Comfy-Org/Wan_2.2_ComfyUI_Repackaged) which use 20+ GB VRAM
+- Uses [QwenVL](https://github.com/1038lab/ComfyUI-QwenVL) to auto-prompt for the input image
+- Uses [4x-AnimeSharp](https://huggingface.co/utnah/esrgan/blob/main/4x-AnimeSharp.pth) to upscale the output video. Probably not the best method but it's pretty efficient (I'm still investigating superior upscale methods).
+- Uses [MoMo](https://github.com/chameleon-ai/comfyui_momo) video frame interpolation, which uses a good amount of VRAM when processing the upscaled frames. I'm still investigating the best looking upscale and interpolation techniques and I stubmbled upon [Jaihyun Lew's MoMo](https://github.com/JHLew/MoMo) and decided to make it into a ComfyUI node to try it out.
+
+### Refine by Segment
+![refine workflow](/assets/workflows/refine.png)
+
+[Refine by Segment Subgraph](/workflows/framework-refine-by-segment.json)
+- Uses [SAM3](https://github.com/wouterverweirder/comfyui_sam3) to identify segments to individually refine
+  - Note that you need to manually download the [sam3 model](https://huggingface.co/1038lab/sam3/resolve/main/sam3.pt) and place it in `models/sam3/sam3.pt`
+- Uses [QwenVL](https://github.com/1038lab/ComfyUI-QwenVL) to auto-prompt for the visual elements of each segment
+  - Note that you should [build bitsandbytes from source](https://huggingface.co/docs/bitsandbytes/main/en/installation?backend=AMD+ROCm#rocm-pip) to enable running the fp8 version of the model
+- Uses [inpaint-nodes](https://github.com/Acly/comfyui-inpaint-nodes) and [Loop Image](https://github.com/WainWong/ComfyUI-Loop-image) to process each identified segment and inpaint them, progressively stacking image refinements segment-by-segment
+
+### NetaYume Lumina
+![lumina workflow](/assets/workflows/lumina.png)
+
+[NetaYume Lumina Workflow](/workflows/framework-netalumina-sdxl-t2i.json)
+- An implementation of [NetaYume Lumina](https://huggingface.co/duongve/NetaYume-Lumina-Image-2.0) text-to-image
+- Uses [LLM Party](https://github.com/heshengtao/comfyui_LLM_party) to condition the lumina prompt into a Stable Diffusion prompt and refines the image using SDXL
+- Uses the above Refine By Segment subgraph
 
 ## Koboldcpp Settings
 - Use [koboldcpp-rocm](https://github.com/YellowRoseCx/koboldcpp-rocm), build from source or install the [koboldcpp-hipblas](https://aur.archlinux.org/packages/koboldcpp-hipblas) AUR package
