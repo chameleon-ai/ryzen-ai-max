@@ -243,6 +243,30 @@
       "bgcolor": "#353"
     },
     {
+      "id": 39,
+      "type": "MarkdownNote",
+      "pos": [
+        545.178885687976,
+        350.6948602066314
+      ],
+      "size": [
+        598.7795449294237,
+        666.9855228098039
+      ],
+      "flags": {},
+      "order": 2,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [],
+      "title": "Models",
+      "properties": {},
+      "widgets_values": [
+        "## Lumina Model:\n[NetaYume Lumina](https://huggingface.co/duongve/NetaYume-Lumina-Image-2.0)\\\n[v4 all in one](https://huggingface.co/duongve/NetaYume-Lumina-Image-2.0/resolve/main/NetaYume_v4_all_in_one.safetensors)\\\nPlace it in `models/checkpoints`\n\n## Stable Diffusion XL Model:\nUse your favorite. I'm using [TSRMix v5.0](https://civitai.com/models/2013051/tsrmix). Place it in `models/checkpoints`\\\nNote that this workflow also explicitly uses the [SDXL VAE](https://huggingface.co/stabilityai/sdxl-vae/resolve/main/sdxl_vae.safetensors) separate from the model. Place it in `models/vae`\n\n\n## Local LLM options:\nThe model can be located anywhere on the filesystem, use a fully qualified path.\n\n- BlackSheep-Llama3.2-3B, [full weights](https://huggingface.co/TroyDoesAI/BlackSheep-Llama3.2-3B) or [GGUF](https://huggingface.co/mradermacher/BlackSheep-Llama3.2-3B-GGUF)\n\n- IceAbsintheNeatRP-7b, [full weights](https://huggingface.co/icefog72/IceAbsintheNeatRP-7b) or [GGUF](https://huggingface.co/mradermacher/IceAbsintheNeatRP-7b-GGUF)\n\nCheck out the [UGI Leaderboard](https://huggingface.co/spaces/DontPlanToEnd/UGI-Leaderboard) for recent models and look for ones that rank highly on style adherence. I've tried things like GPT OSS, but it being a thinking model, it outputs a lot of thinking text before getting to the prompt, but simple roleplay models tend to obey the system command to output only a comma delimited list of tags, even if they're not the smartest.\n\nI had difficulty with [LLM Party](https://github.com/heshengtao/comfyui_LLM_party) nodes. The full weights appear to have a memory leak and the GGUF nodes seem to only want to do CPU inference. However, the [f16](https://huggingface.co/mradermacher/BlackSheep-Llama3.2-3B-GGUF/resolve/main/BlackSheep-Llama3.2-3B.f16.gguf) quant of the 3B model loads and runs in about 5 seconds, so it's not a problem. I had difficulties using larger models in the 24B size range.\n\n## SAM3\n\nThe \"Refine by Segment\" subgraphs use [SAM3](https://github.com/wouterverweirder/comfyui_sam3) to select segments to further refine. You can define anything you want in the `prompt` section and it will serially process all generated segments.\n\nThe node tries to download the sam3 module if it doesn't exist, but it tries to download from [the official facebook release](https://huggingface.co/facebook/sam3/tree/main) which requires authentication.\n\nHowever, you can manually download the [checkpoint](https://huggingface.co/1038lab/sam3/resolve/main/sam3.pt) mirror from [1038 lab](https://huggingface.co/1038lab/sam3/tree/main) and place it in `models/sam3/sam3.pt`\n\n## Qwen-VL\n\nThe \"Refine by Segment\" subgraphs use [Qwen-VL](https://github.com/1038lab/ComfyUI-QwenVL) to determine the prompt to apply to the region. The default selected fp8 Qwen-VL-4B-Instruct potentially uses a lot of VRAM depending on the input resolution. You may want to select a smaller model like Qwen-VL-2B-Instruct 4-bit or bypass the node altogether. If you bypass the node, be sure to apply a manual positive prompt.\n\nAlso note that running the 8-bit quantization on ROCm requires [building bitsandbytes from source](https://huggingface.co/docs/bitsandbytes/main/en/installation?backend=AMD+ROCm#rocm-pip). It is recommended to do this since running the fp16 weights is much less efficient and can cause a memory leak.\n\nThe VL prompt is also geared toward describing people and ignoring the background. You may want to adjust the prompt or bypass the VL node if you are refining background elements."
+      ],
+      "color": "#432",
+      "bgcolor": "#653"
+    },
+    {
       "id": 40,
       "type": "6848ca47-712c-461d-98b1-03dec17c2bcc",
       "pos": [
@@ -474,30 +498,6 @@
         1024,
         "",
         "jpeg artifacts, worst quality, low quality, lowres, signature, watermark, artist_name, twitter_username, patreon_logo, letterboxed, censored"
-      ],
-      "color": "#432",
-      "bgcolor": "#653"
-    },
-    {
-      "id": 39,
-      "type": "MarkdownNote",
-      "pos": [
-        545.178885687976,
-        350.6948602066314
-      ],
-      "size": [
-        598.7795449294237,
-        666.9855228098039
-      ],
-      "flags": {},
-      "order": 2,
-      "mode": 0,
-      "inputs": [],
-      "outputs": [],
-      "title": "Models",
-      "properties": {},
-      "widgets_values": [
-        "## Lumina Model:\n[NetaYume Lumina](https://huggingface.co/duongve/NetaYume-Lumina-Image-2.0)\\\n[v4 all in one](https://huggingface.co/duongve/NetaYume-Lumina-Image-2.0/resolve/main/NetaYume_v4_all_in_one.safetensors)\\\nPlace it in `models/checkpoints`\n\n## Stable Diffusion XL Model:\nUse your favorite. I'm using [TSRMix v5.0](https://civitai.com/models/2013051/tsrmix). Place it in `models/checkpoints`\\\nNote that this workflow also explicitly uses the [SDXL VAE](https://huggingface.co/stabilityai/sdxl-vae/resolve/main/sdxl_vae.safetensors) separate from the model. Place it in `models/vae`\n\n\n## Local LLM options:\nThe model can be located anywhere on the filesystem, use a fully qualified path.\n\n- BlackSheep-Llama3.2-3B, [full weights](https://huggingface.co/TroyDoesAI/BlackSheep-Llama3.2-3B) or [GGUF](https://huggingface.co/mradermacher/BlackSheep-Llama3.2-3B-GGUF)\n\n- IceAbsintheNeatRP-7b, [full weights](https://huggingface.co/icefog72/IceAbsintheNeatRP-7b) or [GGUF](https://huggingface.co/mradermacher/IceAbsintheNeatRP-7b-GGUF)\n\nCheck out the [UGI Leaderboard](https://huggingface.co/spaces/DontPlanToEnd/UGI-Leaderboard) for recent models and look for ones that rank highly on style adherence. I've tried things like GPT OSS, but it being a thinking model, it outputs a lot of thinking text before getting to the prompt, but simple roleplay models tend to obey the system command to output only a comma delimited list of tags, even if they're not the smartest.\n\nI had difficulty with [LLM Party](https://github.com/heshengtao/comfyui_LLM_party) nodes. The full weights appear to have a memory leak and the GGUF nodes seem to only want to do CPU inference. However, the [f16](https://huggingface.co/mradermacher/BlackSheep-Llama3.2-3B-GGUF/resolve/main/BlackSheep-Llama3.2-3B.f16.gguf) quant of the 3B model loads and runs in about 5 seconds, so it's not a problem. I had difficulties using larger models in the 24B size range.\n\n## SAM3\n\nThe \"Refine by Segment\" subgraphs use [SAM3](https://github.com/wouterverweirder/comfyui_sam3) to select segments to further refine. You can define anything you want in the `prompt` section and it will serially process all generated segments.\n\nThe node tries to download the sam3 module if it doesn't exist, but it tries to download from [the official facebook release](https://huggingface.co/facebook/sam3/tree/main) which requires authentication.\n\nHowever, you can manually download the [checkpoint](https://huggingface.co/1038lab/sam3/resolve/main/sam3.pt) mirror from [1038 lab](https://huggingface.co/1038lab/sam3/tree/main) and place it in `models/sam3/sam3.pt`\n\n## Qwen-VL\n\nThe \"Refine by Segment\" subgraphs use [Qwen-VL](https://github.com/1038lab/ComfyUI-QwenVL) to determine the prompt to apply to the region. The default selected fp8 Qwen-VL-4B-Instruct potentially uses a lot of VRAM depending on the input resolution. You may want to select a smaller model like Qwen-VL-2B-Instruct 4-bit or bypass the node altogether. If you bypass the node, be sure to apply a manual positive prompt.\n\nAlso note that running the 8-bit quantization on ROCm requires [building bitsandbytes from source](https://huggingface.co/docs/bitsandbytes/main/en/installation?backend=AMD+ROCm#rocm-pip). It is recommended to do this since running the fp16 weights is much less efficient and can cause a memory leak.\n\nThe VL prompt is also geared toward describing people and ignoring the background. You may want to adjust the prompt or bypass the VL node if you are refining background elements."
       ],
       "color": "#432",
       "bgcolor": "#653"
@@ -1101,7 +1101,7 @@
               "Node name for S&R": "PrimitiveInt"
             },
             "widgets_values": [
-              -1002550308557943,
+              905401045384045,
               "randomize"
             ]
           },
@@ -1189,7 +1189,7 @@
               "Node name for S&R": "KSampler"
             },
             "widgets_values": [
-              542776796541902,
+              789414327398311,
               "randomize",
               24,
               4,
@@ -1291,7 +1291,7 @@
               "Node name for S&R": "KSampler"
             },
             "widgets_values": [
-              554310137932656,
+              598850810686601,
               "randomize",
               4,
               4,
@@ -1835,7 +1835,7 @@
               "Node name for S&R": "KSampler"
             },
             "widgets_values": [
-              870636814148620,
+              858028460972092,
               "randomize",
               24,
               6,
@@ -3285,7 +3285,8 @@
             "title": "Calculate Mask Width",
             "properties": {
               "cnr_id": "comfyui-custom-scripts",
-              "ver": "1.2.5"
+              "ver": "1.2.5",
+              "Node name for S&R": "MathExpression|pysssss"
             },
             "widgets_values": [
               "a*b"
@@ -3347,61 +3348,11 @@
             "title": "Calculate Mask Height",
             "properties": {
               "cnr_id": "comfyui-custom-scripts",
-              "ver": "1.2.5"
+              "ver": "1.2.5",
+              "Node name for S&R": "MathExpression|pysssss"
             },
             "widgets_values": [
               "a*b"
-            ]
-          },
-          {
-            "id": 54,
-            "type": "ImageScaleBy",
-            "pos": [
-              2544.890894281398,
-              880.0694578125361
-            ],
-            "size": [
-              270,
-              82
-            ],
-            "flags": {},
-            "order": 21,
-            "mode": 0,
-            "inputs": [
-              {
-                "localized_name": "image",
-                "name": "image",
-                "type": "IMAGE",
-                "link": 149
-              },
-              {
-                "localized_name": "scale_by",
-                "name": "scale_by",
-                "type": "FLOAT",
-                "widget": {
-                  "name": "scale_by"
-                },
-                "link": 148
-              }
-            ],
-            "outputs": [
-              {
-                "localized_name": "IMAGE",
-                "name": "IMAGE",
-                "type": "IMAGE",
-                "links": [
-                  150
-                ]
-              }
-            ],
-            "properties": {
-              "cnr_id": "comfy-core",
-              "ver": "0.6.0",
-              "Node name for S&R": "ImageScaleBy"
-            },
-            "widgets_values": [
-              "bicubic",
-              1
             ]
           },
           {
@@ -4030,7 +3981,7 @@
               "Node name for S&R": "KSampler"
             },
             "widgets_values": [
-              512827008506490,
+              558468385460187,
               "randomize",
               28,
               4,
@@ -4084,68 +4035,6 @@
               "Node name for S&R": "VAEDecode"
             },
             "widgets_values": []
-          },
-          {
-            "id": 53,
-            "type": "ImageScale",
-            "pos": [
-              4081.9347977371126,
-              864.1363559763151
-            ],
-            "size": [
-              270,
-              130
-            ],
-            "flags": {},
-            "order": 20,
-            "mode": 0,
-            "inputs": [
-              {
-                "localized_name": "image",
-                "name": "image",
-                "type": "IMAGE",
-                "link": 144
-              },
-              {
-                "localized_name": "width",
-                "name": "width",
-                "type": "INT",
-                "widget": {
-                  "name": "width"
-                },
-                "link": 142
-              },
-              {
-                "localized_name": "height",
-                "name": "height",
-                "type": "INT",
-                "widget": {
-                  "name": "height"
-                },
-                "link": 143
-              }
-            ],
-            "outputs": [
-              {
-                "localized_name": "IMAGE",
-                "name": "IMAGE",
-                "type": "IMAGE",
-                "links": [
-                  145
-                ]
-              }
-            ],
-            "properties": {
-              "cnr_id": "comfy-core",
-              "ver": "0.6.0",
-              "Node name for S&R": "ImageScale"
-            },
-            "widgets_values": [
-              "nearest-exact",
-              1024,
-              1024,
-              "disabled"
-            ]
           },
           {
             "id": 41,
@@ -4341,7 +4230,7 @@
               "Node name for S&R": "BatchUncropAdvanced"
             },
             "widgets_values": [
-              0.4,
+              0.25,
               1,
               true,
               false
@@ -4568,7 +4457,8 @@
             "title": "Calculate Scale Factor",
             "properties": {
               "cnr_id": "comfyui-custom-scripts",
-              "ver": "1.2.5"
+              "ver": "1.2.5",
+              "Node name for S&R": "MathExpression|pysssss"
             },
             "widgets_values": [
               "max(c/max(a,b),1)"
@@ -4674,11 +4564,124 @@
               "Write a brief description of the person in the image. Keep it concise. Do not use full sentences, output only a comma delimited list of attributes and attire. Keep the comma delimited list limited to adjectives, nouns, and verbs related to visible attributes like clothing, eye color, skin color, hair color, accessories, facial expressions, etc.\nOnly describe the character in the image, not the setting or background.\nExample:\n\"Red hair, green eyes, smiling, earrings, freckles, black dress, white shoes, bell choker, exposed breasts, pink nipples\"",
               512,
               true,
-              4099538167,
+              2413184816,
               "randomize"
             ],
             "color": "#28403f",
             "bgcolor": "#374539"
+          },
+          {
+            "id": 53,
+            "type": "ImageScale",
+            "pos": [
+              4081.9347977371126,
+              864.1363559763151
+            ],
+            "size": [
+              270,
+              130
+            ],
+            "flags": {},
+            "order": 20,
+            "mode": 0,
+            "inputs": [
+              {
+                "localized_name": "image",
+                "name": "image",
+                "type": "IMAGE",
+                "link": 144
+              },
+              {
+                "localized_name": "width",
+                "name": "width",
+                "type": "INT",
+                "widget": {
+                  "name": "width"
+                },
+                "link": 142
+              },
+              {
+                "localized_name": "height",
+                "name": "height",
+                "type": "INT",
+                "widget": {
+                  "name": "height"
+                },
+                "link": 143
+              }
+            ],
+            "outputs": [
+              {
+                "localized_name": "IMAGE",
+                "name": "IMAGE",
+                "type": "IMAGE",
+                "links": [
+                  145
+                ]
+              }
+            ],
+            "properties": {
+              "cnr_id": "comfy-core",
+              "ver": "0.6.0",
+              "Node name for S&R": "ImageScale"
+            },
+            "widgets_values": [
+              "lanczos",
+              1024,
+              1024,
+              "disabled"
+            ]
+          },
+          {
+            "id": 54,
+            "type": "ImageScaleBy",
+            "pos": [
+              2544.890894281398,
+              880.0694578125361
+            ],
+            "size": [
+              270,
+              82
+            ],
+            "flags": {},
+            "order": 21,
+            "mode": 0,
+            "inputs": [
+              {
+                "localized_name": "image",
+                "name": "image",
+                "type": "IMAGE",
+                "link": 149
+              },
+              {
+                "localized_name": "scale_by",
+                "name": "scale_by",
+                "type": "FLOAT",
+                "widget": {
+                  "name": "scale_by"
+                },
+                "link": 148
+              }
+            ],
+            "outputs": [
+              {
+                "localized_name": "IMAGE",
+                "name": "IMAGE",
+                "type": "IMAGE",
+                "links": [
+                  150
+                ]
+              }
+            ],
+            "properties": {
+              "cnr_id": "comfy-core",
+              "ver": "0.6.0",
+              "Node name for S&R": "ImageScaleBy"
+            },
+            "widgets_values": [
+              "lanczos",
+              1
+            ]
           }
         ],
         "groups": [
@@ -5820,7 +5823,8 @@
             "title": "Calculate Mask Width",
             "properties": {
               "cnr_id": "comfyui-custom-scripts",
-              "ver": "1.2.5"
+              "ver": "1.2.5",
+              "Node name for S&R": "MathExpression|pysssss"
             },
             "widgets_values": [
               "a*b"
@@ -5882,61 +5886,11 @@
             "title": "Calculate Mask Height",
             "properties": {
               "cnr_id": "comfyui-custom-scripts",
-              "ver": "1.2.5"
+              "ver": "1.2.5",
+              "Node name for S&R": "MathExpression|pysssss"
             },
             "widgets_values": [
               "a*b"
-            ]
-          },
-          {
-            "id": 54,
-            "type": "ImageScaleBy",
-            "pos": [
-              2544.890894281398,
-              880.0694578125361
-            ],
-            "size": [
-              270,
-              82
-            ],
-            "flags": {},
-            "order": 21,
-            "mode": 0,
-            "inputs": [
-              {
-                "localized_name": "image",
-                "name": "image",
-                "type": "IMAGE",
-                "link": 149
-              },
-              {
-                "localized_name": "scale_by",
-                "name": "scale_by",
-                "type": "FLOAT",
-                "widget": {
-                  "name": "scale_by"
-                },
-                "link": 148
-              }
-            ],
-            "outputs": [
-              {
-                "localized_name": "IMAGE",
-                "name": "IMAGE",
-                "type": "IMAGE",
-                "links": [
-                  150
-                ]
-              }
-            ],
-            "properties": {
-              "cnr_id": "comfy-core",
-              "ver": "0.6.0",
-              "Node name for S&R": "ImageScaleBy"
-            },
-            "widgets_values": [
-              "bicubic",
-              1
             ]
           },
           {
@@ -6565,7 +6519,7 @@
               "Node name for S&R": "KSampler"
             },
             "widgets_values": [
-              466733079891499,
+              265442455546528,
               "randomize",
               36,
               4,
@@ -6619,68 +6573,6 @@
               "Node name for S&R": "VAEDecode"
             },
             "widgets_values": []
-          },
-          {
-            "id": 53,
-            "type": "ImageScale",
-            "pos": [
-              4081.9347977371126,
-              864.1363559763151
-            ],
-            "size": [
-              270,
-              130
-            ],
-            "flags": {},
-            "order": 20,
-            "mode": 0,
-            "inputs": [
-              {
-                "localized_name": "image",
-                "name": "image",
-                "type": "IMAGE",
-                "link": 144
-              },
-              {
-                "localized_name": "width",
-                "name": "width",
-                "type": "INT",
-                "widget": {
-                  "name": "width"
-                },
-                "link": 142
-              },
-              {
-                "localized_name": "height",
-                "name": "height",
-                "type": "INT",
-                "widget": {
-                  "name": "height"
-                },
-                "link": 143
-              }
-            ],
-            "outputs": [
-              {
-                "localized_name": "IMAGE",
-                "name": "IMAGE",
-                "type": "IMAGE",
-                "links": [
-                  145
-                ]
-              }
-            ],
-            "properties": {
-              "cnr_id": "comfy-core",
-              "ver": "0.6.0",
-              "Node name for S&R": "ImageScale"
-            },
-            "widgets_values": [
-              "nearest-exact",
-              1024,
-              1024,
-              "disabled"
-            ]
           },
           {
             "id": 41,
@@ -6876,7 +6768,7 @@
               "Node name for S&R": "BatchUncropAdvanced"
             },
             "widgets_values": [
-              0.4,
+              0.25,
               1,
               true,
               false
@@ -7103,7 +6995,8 @@
             "title": "Calculate Scale Factor",
             "properties": {
               "cnr_id": "comfyui-custom-scripts",
-              "ver": "1.2.5"
+              "ver": "1.2.5",
+              "Node name for S&R": "MathExpression|pysssss"
             },
             "widgets_values": [
               "max(c/max(a,b),1)"
@@ -7209,11 +7102,124 @@
               "Write a brief description of the person in the image. Keep it concise. Do not use full sentences, output only a comma delimited list of attributes and attire. Keep the comma delimited list limited to adjectives, nouns, and verbs related to visible attributes like clothing, eye color, skin color, hair color, accessories, facial expressions, etc.\nOnly describe the character in the image, not the setting or background.\nExample:\n\"Red hair, green eyes, smiling, earrings, freckles, black dress, white shoes, bell choker, exposed breasts, pink nipples\"",
               512,
               true,
-              4191399472,
+              649123147,
               "randomize"
             ],
             "color": "#28403f",
             "bgcolor": "#374539"
+          },
+          {
+            "id": 54,
+            "type": "ImageScaleBy",
+            "pos": [
+              2544.890894281398,
+              880.0694578125361
+            ],
+            "size": [
+              270,
+              82
+            ],
+            "flags": {},
+            "order": 21,
+            "mode": 0,
+            "inputs": [
+              {
+                "localized_name": "image",
+                "name": "image",
+                "type": "IMAGE",
+                "link": 149
+              },
+              {
+                "localized_name": "scale_by",
+                "name": "scale_by",
+                "type": "FLOAT",
+                "widget": {
+                  "name": "scale_by"
+                },
+                "link": 148
+              }
+            ],
+            "outputs": [
+              {
+                "localized_name": "IMAGE",
+                "name": "IMAGE",
+                "type": "IMAGE",
+                "links": [
+                  150
+                ]
+              }
+            ],
+            "properties": {
+              "cnr_id": "comfy-core",
+              "ver": "0.6.0",
+              "Node name for S&R": "ImageScaleBy"
+            },
+            "widgets_values": [
+              "lanczos",
+              1
+            ]
+          },
+          {
+            "id": 53,
+            "type": "ImageScale",
+            "pos": [
+              4081.9347977371126,
+              864.1363559763151
+            ],
+            "size": [
+              270,
+              130
+            ],
+            "flags": {},
+            "order": 20,
+            "mode": 0,
+            "inputs": [
+              {
+                "localized_name": "image",
+                "name": "image",
+                "type": "IMAGE",
+                "link": 144
+              },
+              {
+                "localized_name": "width",
+                "name": "width",
+                "type": "INT",
+                "widget": {
+                  "name": "width"
+                },
+                "link": 142
+              },
+              {
+                "localized_name": "height",
+                "name": "height",
+                "type": "INT",
+                "widget": {
+                  "name": "height"
+                },
+                "link": 143
+              }
+            ],
+            "outputs": [
+              {
+                "localized_name": "IMAGE",
+                "name": "IMAGE",
+                "type": "IMAGE",
+                "links": [
+                  145
+                ]
+              }
+            ],
+            "properties": {
+              "cnr_id": "comfy-core",
+              "ver": "0.6.0",
+              "Node name for S&R": "ImageScale"
+            },
+            "widgets_values": [
+              "lanczos",
+              1024,
+              1024,
+              "disabled"
+            ]
           }
         ],
         "groups": [
@@ -7845,10 +7851,10 @@
   "config": {},
   "extra": {
     "ds": {
-      "scale": 0.7179691280804004,
+      "scale": 0.7363356349379941,
       "offset": [
-        -230.45260553548243,
-        -130.0945984088175
+        -1125.8796552842377,
+        -66.89568443202826
       ]
     },
     "frontendVersion": "1.35.9",
