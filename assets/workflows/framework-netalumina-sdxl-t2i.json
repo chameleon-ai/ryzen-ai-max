@@ -1,8 +1,8 @@
 {
   "id": "9ae6082b-c7f4-433c-9971-7a8f65a3ea65",
   "revision": 0,
-  "last_node_id": 53,
-  "last_link_id": 67,
+  "last_node_id": 55,
+  "last_link_id": 72,
   "nodes": [
     {
       "id": 16,
@@ -87,6 +87,45 @@
       ]
     },
     {
+      "id": 50,
+      "type": "LoadImageOutput",
+      "pos": [
+        1137.8685591776373,
+        -245.3795336171164
+      ],
+      "size": [
+        582.7900029779826,
+        523.5151284392789
+      ],
+      "flags": {},
+      "order": 2,
+      "mode": 4,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": []
+        },
+        {
+          "name": "MASK",
+          "type": "MASK",
+          "links": null
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.6.0",
+        "Node name for S&R": "LoadImageOutput"
+      },
+      "widgets_values": [
+        "Lumina-XL_00083_.png [output]",
+        false,
+        "refresh",
+        "image"
+      ]
+    },
+    {
       "id": 37,
       "type": "76d8f44b-a914-4f8e-949e-ba63038a9158",
       "pos": [
@@ -98,7 +137,7 @@
         921.9136852007764
       ],
       "flags": {},
-      "order": 2,
+      "order": 3,
       "mode": 0,
       "inputs": [
         {
@@ -190,7 +229,7 @@
           "type": "IMAGE",
           "links": [
             59,
-            67
+            70
           ]
         }
       ],
@@ -274,8 +313,8 @@
       "id": 46,
       "type": "CatboxAnonSaveImageStealth",
       "pos": [
-        2856.437632511083,
-        352.3569487076106
+        2848.506086025225,
+        342.8390929245819
       ],
       "size": [
         1259.381108645845,
@@ -288,7 +327,7 @@
         {
           "name": "images",
           "type": "IMAGE",
-          "link": 64
+          "link": 72
         }
       ],
       "outputs": [],
@@ -305,50 +344,11 @@
       ]
     },
     {
-      "id": 50,
-      "type": "LoadImageOutput",
+      "id": 54,
+      "type": "e09c579c-1ab9-4297-a103-b5d9969437f8",
       "pos": [
-        1137.8685591776373,
-        -245.3795336171164
-      ],
-      "size": [
-        582.7900029779826,
-        523.5151284392789
-      ],
-      "flags": {},
-      "order": 3,
-      "mode": 4,
-      "inputs": [],
-      "outputs": [
-        {
-          "name": "IMAGE",
-          "type": "IMAGE",
-          "links": []
-        },
-        {
-          "name": "MASK",
-          "type": "MASK",
-          "links": null
-        }
-      ],
-      "properties": {
-        "cnr_id": "comfy-core",
-        "ver": "0.6.0",
-        "Node name for S&R": "LoadImageOutput"
-      },
-      "widgets_values": [
-        "Lumina-XL_00083_.png [output]",
-        false,
-        "refresh",
-        "image"
-      ]
-    },
-    {
-      "id": 40,
-      "type": "6848ca47-712c-461d-98b1-03dec17c2bcc",
-      "pos": [
-        1775.4210422860783,
-        349.1669029938432
+        1764.7816342490669,
+        346.9350146520186
       ],
       "size": [
         523.8617120151421,
@@ -361,7 +361,7 @@
         {
           "name": "image",
           "type": "IMAGE",
-          "link": 67
+          "link": 70
         },
         {
           "label": "segment resolution",
@@ -389,6 +389,15 @@
             "name": "text"
           },
           "link": null
+        },
+        {
+          "label": "grow mask",
+          "name": "expand",
+          "type": "INT",
+          "widget": {
+            "name": "expand"
+          },
+          "link": null
         }
       ],
       "outputs": [
@@ -397,7 +406,7 @@
           "name": "final_image",
           "type": "IMAGE",
           "links": [
-            66
+            71
           ]
         }
       ],
@@ -414,6 +423,10 @@
           [
             "-1",
             "value"
+          ],
+          [
+            "-1",
+            "expand"
           ],
           [
             "-1",
@@ -454,19 +467,20 @@
       "widgets_values": [
         null,
         null,
-        2048,
+        1536,
+        12,
         "",
-        "jpeg artifacts, worst quality, low quality, lowres, signature, watermark, artist_name, twitter_username, patreon_logo, letterboxed, censored"
+        "jpeg artifacts, worst quality, low quality, lowres, signature, watermark, artist_name, twitter_username, patreon_logo, letterboxed, censored, shiny skin"
       ],
       "color": "#432",
       "bgcolor": "#653"
     },
     {
-      "id": 53,
-      "type": "ff8fd17e-575a-406b-af48-ae0caca0f6ae",
+      "id": 55,
+      "type": "b4457d6f-f892-46b5-bc8f-21a1c7fb5c48",
       "pos": [
-        2318.481562100307,
-        351.31693669936215
+        2302.5404859901982,
+        345.3487053548475
       ],
       "size": [
         523.8617120151421,
@@ -479,7 +493,7 @@
         {
           "name": "image",
           "type": "IMAGE",
-          "link": 66
+          "link": 71
         },
         {
           "label": "segment resolution",
@@ -507,6 +521,15 @@
             "name": "text"
           },
           "link": null
+        },
+        {
+          "label": "grow mask",
+          "name": "expand",
+          "type": "INT",
+          "widget": {
+            "name": "expand"
+          },
+          "link": null
         }
       ],
       "outputs": [
@@ -515,7 +538,7 @@
           "name": "final_image",
           "type": "IMAGE",
           "links": [
-            64
+            72
           ]
         }
       ],
@@ -532,6 +555,10 @@
           [
             "-1",
             "value"
+          ],
+          [
+            "-1",
+            "expand"
           ],
           [
             "-1",
@@ -572,9 +599,10 @@
       "widgets_values": [
         null,
         null,
-        1280,
+        1536,
+        4,
         "",
-        "jpeg artifacts, worst quality, low quality, lowres, signature, watermark, artist_name, twitter_username, patreon_logo, letterboxed, censored"
+        "jpeg artifacts, worst quality, low quality, lowres, signature, watermark, artist_name, twitter_username, patreon_logo, letterboxed, censored, shiny skin"
       ],
       "color": "#432",
       "bgcolor": "#653"
@@ -590,26 +618,26 @@
       "IMAGE"
     ],
     [
-      64,
-      53,
-      0,
-      46,
-      0,
-      "IMAGE"
-    ],
-    [
-      66,
-      40,
-      0,
-      53,
-      0,
-      "IMAGE"
-    ],
-    [
-      67,
+      70,
       37,
       0,
-      40,
+      54,
+      0,
+      "IMAGE"
+    ],
+    [
+      71,
+      54,
+      0,
+      55,
+      0,
+      "IMAGE"
+    ],
+    [
+      72,
+      55,
+      0,
+      46,
       0,
       "IMAGE"
     ]
@@ -1199,7 +1227,7 @@
               "Node name for S&R": "PrimitiveInt"
             },
             "widgets_values": [
-              1043170560996537,
+              -280704173869572,
               "randomize"
             ]
           },
@@ -1287,7 +1315,7 @@
               "Node name for S&R": "KSampler"
             },
             "widgets_values": [
-              603075055168502,
+              100581620223994,
               "randomize",
               24,
               4,
@@ -1389,7 +1417,7 @@
               "Node name for S&R": "KSampler"
             },
             "widgets_values": [
-              410462287178531,
+              718190302316603,
               "randomize",
               4,
               4,
@@ -1896,7 +1924,7 @@
               "Node name for S&R": "KSampler"
             },
             "widgets_values": [
-              867881290707993,
+              447803283287159,
               "randomize",
               36,
               6,
@@ -2869,12 +2897,12 @@
         }
       },
       {
-        "id": "6848ca47-712c-461d-98b1-03dec17c2bcc",
+        "id": "e09c579c-1ab9-4297-a103-b5d9969437f8",
         "version": 1,
         "state": {
           "lastGroupId": 8,
-          "lastNodeId": 111,
-          "lastLinkId": 334,
+          "lastNodeId": 112,
+          "lastLinkId": 338,
           "lastRerouteId": 0
         },
         "revision": 0,
@@ -2886,7 +2914,7 @@
             806.7479357092758,
             831.269798557474,
             186.64999389648438,
-            120
+            140
           ]
         },
         "outputNode": {
@@ -2950,6 +2978,19 @@
             "pos": [
               973.3979296057602,
               911.269798557474
+            ]
+          },
+          {
+            "id": "f7bb179f-6b28-490e-9a20-6ea22d5bb93f",
+            "name": "expand",
+            "type": "INT",
+            "linkIds": [
+              337
+            ],
+            "label": "grow mask",
+            "pos": [
+              973.3979296057602,
+              931.269798557474
             ]
           }
         ],
@@ -3092,194 +3133,11 @@
             "widgets_values": []
           },
           {
-            "id": 50,
-            "type": "GetImageSize",
-            "pos": [
-              1828.7937155612335,
-              987.785891469317
-            ],
-            "size": [
-              210,
-              136
-            ],
-            "flags": {},
-            "order": 19,
-            "mode": 0,
-            "inputs": [
-              {
-                "localized_name": "image",
-                "name": "image",
-                "type": "IMAGE",
-                "link": 141
-              }
-            ],
-            "outputs": [
-              {
-                "localized_name": "width",
-                "name": "width",
-                "type": "INT",
-                "links": [
-                  142,
-                  146,
-                  158
-                ]
-              },
-              {
-                "localized_name": "height",
-                "name": "height",
-                "type": "INT",
-                "links": [
-                  143,
-                  147,
-                  162
-                ]
-              },
-              {
-                "localized_name": "batch_size",
-                "name": "batch_size",
-                "type": "INT",
-                "links": null
-              }
-            ],
-            "properties": {
-              "cnr_id": "comfy-core",
-              "ver": "0.6.0",
-              "Node name for S&R": "GetImageSize"
-            },
-            "widgets_values": []
-          },
-          {
-            "id": 60,
-            "type": "MathExpression|pysssss",
-            "pos": [
-              2069.3603217995246,
-              1081.613032039718
-            ],
-            "size": [
-              210,
-              128
-            ],
-            "flags": {},
-            "order": 23,
-            "mode": 0,
-            "inputs": [
-              {
-                "localized_name": "a",
-                "name": "a",
-                "shape": 7,
-                "type": "INT,FLOAT,IMAGE,LATENT",
-                "link": 158
-              },
-              {
-                "localized_name": "b",
-                "name": "b",
-                "shape": 7,
-                "type": "INT,FLOAT,IMAGE,LATENT",
-                "link": 159
-              },
-              {
-                "localized_name": "c",
-                "name": "c",
-                "shape": 7,
-                "type": "INT,FLOAT,IMAGE,LATENT",
-                "link": null
-              }
-            ],
-            "outputs": [
-              {
-                "localized_name": "INT",
-                "name": "INT",
-                "type": "INT",
-                "links": [
-                  164
-                ]
-              },
-              {
-                "localized_name": "FLOAT",
-                "name": "FLOAT",
-                "type": "FLOAT",
-                "links": null
-              }
-            ],
-            "title": "Calculate Mask Width",
-            "properties": {
-              "cnr_id": "comfyui-custom-scripts",
-              "ver": "1.2.5",
-              "Node name for S&R": "MathExpression|pysssss"
-            },
-            "widgets_values": [
-              "a*b"
-            ]
-          },
-          {
-            "id": 61,
-            "type": "MathExpression|pysssss",
-            "pos": [
-              2305.9671989482576,
-              1081.9035439651773
-            ],
-            "size": [
-              210,
-              128
-            ],
-            "flags": {},
-            "order": 24,
-            "mode": 0,
-            "inputs": [
-              {
-                "localized_name": "a",
-                "name": "a",
-                "shape": 7,
-                "type": "INT,FLOAT,IMAGE,LATENT",
-                "link": 161
-              },
-              {
-                "localized_name": "b",
-                "name": "b",
-                "shape": 7,
-                "type": "INT,FLOAT,IMAGE,LATENT",
-                "link": 162
-              },
-              {
-                "localized_name": "c",
-                "name": "c",
-                "shape": 7,
-                "type": "INT,FLOAT,IMAGE,LATENT",
-                "link": null
-              }
-            ],
-            "outputs": [
-              {
-                "localized_name": "INT",
-                "name": "INT",
-                "type": "INT",
-                "links": [
-                  163
-                ]
-              },
-              {
-                "localized_name": "FLOAT",
-                "name": "FLOAT",
-                "type": "FLOAT",
-                "links": null
-              }
-            ],
-            "title": "Calculate Mask Height",
-            "properties": {
-              "cnr_id": "comfyui-custom-scripts",
-              "ver": "1.2.5",
-              "Node name for S&R": "MathExpression|pysssss"
-            },
-            "widgets_values": [
-              "a*b"
-            ]
-          },
-          {
             "id": 76,
             "type": "GetMaskSizeAndCount",
             "pos": [
-              1323.1555265494915,
-              577.8724188950081
+              1000.8446941455987,
+              583.6148130450025
             ],
             "size": [
               191.26666870117188,
@@ -3304,14 +3162,14 @@
                 "links": []
               },
               {
-                "label": "2048 width",
+                "label": "1920 width",
                 "localized_name": "width",
                 "name": "width",
                 "type": "INT",
                 "links": []
               },
               {
-                "label": "1512 height",
+                "label": "1296 height",
                 "localized_name": "height",
                 "name": "height",
                 "type": "INT",
@@ -3338,8 +3196,8 @@
             "id": 104,
             "type": "CyberEve_SingleImageLoopOpen",
             "pos": [
-              1530.8706798633877,
-              571.4477005810153
+              1208.5598474594974,
+              577.1900947310097
             ],
             "size": [
               279.09999694824216,
@@ -3422,72 +3280,6 @@
             },
             "widgets_values": [
               5
-            ]
-          },
-          {
-            "id": 107,
-            "type": "GetImageRangeFromBatch",
-            "pos": [
-              1843.8818683023035,
-              608.0987727292526
-            ],
-            "size": [
-              316.5806700303996,
-              107.10040895641089
-            ],
-            "flags": {},
-            "order": 31,
-            "mode": 0,
-            "inputs": [
-              {
-                "localized_name": "images",
-                "name": "images",
-                "shape": 7,
-                "type": "IMAGE",
-                "link": null
-              },
-              {
-                "localized_name": "masks",
-                "name": "masks",
-                "shape": 7,
-                "type": "MASK",
-                "link": 322
-              },
-              {
-                "localized_name": "start_index",
-                "name": "start_index",
-                "type": "INT",
-                "widget": {
-                  "name": "start_index"
-                },
-                "link": 315
-              }
-            ],
-            "outputs": [
-              {
-                "localized_name": "IMAGE",
-                "name": "IMAGE",
-                "type": "IMAGE",
-                "links": null
-              },
-              {
-                "localized_name": "MASK",
-                "name": "MASK",
-                "type": "MASK",
-                "links": [
-                  316,
-                  323
-                ]
-              }
-            ],
-            "properties": {
-              "cnr_id": "comfyui-kjnodes",
-              "ver": "1.2.0",
-              "Node name for S&R": "GetImageRangeFromBatch"
-            },
-            "widgets_values": [
-              0,
-              1
             ]
           },
           {
@@ -3579,7 +3371,7 @@
                 "localized_name": "mask",
                 "name": "mask",
                 "type": "MASK",
-                "link": 323
+                "link": 336
               }
             ],
             "outputs": [
@@ -3991,264 +3783,10 @@
               "Node name for S&R": "CLIPTextEncode"
             },
             "widgets_values": [
-              "jpeg artifacts, worst quality, low quality, lowres, signature, watermark, artist_name, twitter_username, patreon_logo, letterboxed, censored"
+              "jpeg artifacts, worst quality, low quality, lowres, signature, watermark, artist_name, twitter_username, patreon_logo, letterboxed, censored, shiny skin"
             ],
             "color": "#322",
             "bgcolor": "#533"
-          },
-          {
-            "id": 59,
-            "type": "ResizeMask",
-            "pos": [
-              2545.198178846615,
-              1015.0699721675344
-            ],
-            "size": [
-              270,
-              194
-            ],
-            "flags": {},
-            "order": 22,
-            "mode": 0,
-            "inputs": [
-              {
-                "localized_name": "mask",
-                "name": "mask",
-                "type": "MASK",
-                "link": 156
-              },
-              {
-                "localized_name": "width",
-                "name": "width",
-                "type": "INT",
-                "widget": {
-                  "name": "width"
-                },
-                "link": 164
-              },
-              {
-                "localized_name": "height",
-                "name": "height",
-                "type": "INT",
-                "widget": {
-                  "name": "height"
-                },
-                "link": 163
-              }
-            ],
-            "outputs": [
-              {
-                "localized_name": "mask",
-                "name": "mask",
-                "type": "MASK",
-                "links": [
-                  157
-                ]
-              },
-              {
-                "localized_name": "width",
-                "name": "width",
-                "type": "INT",
-                "links": null
-              },
-              {
-                "localized_name": "height",
-                "name": "height",
-                "type": "INT",
-                "links": null
-              }
-            ],
-            "properties": {
-              "cnr_id": "comfyui-kjnodes",
-              "ver": "1.2.0",
-              "Node name for S&R": "ResizeMask"
-            },
-            "widgets_values": [
-              512,
-              512,
-              false,
-              "lanczos",
-              "disabled"
-            ]
-          },
-          {
-            "id": 39,
-            "type": "BatchCropFromMaskAdvanced",
-            "pos": [
-              1432.6954920971843,
-              859.4388032325628
-            ],
-            "size": [
-              335.73333740234375,
-              242
-            ],
-            "flags": {},
-            "order": 15,
-            "mode": 0,
-            "inputs": [
-              {
-                "localized_name": "original_images",
-                "name": "original_images",
-                "type": "IMAGE",
-                "link": 325
-              },
-              {
-                "localized_name": "masks",
-                "name": "masks",
-                "type": "MASK",
-                "link": 316
-              }
-            ],
-            "outputs": [
-              {
-                "localized_name": "original_images",
-                "name": "original_images",
-                "type": "IMAGE",
-                "links": [
-                  108
-                ]
-              },
-              {
-                "localized_name": "cropped_images",
-                "name": "cropped_images",
-                "type": "IMAGE",
-                "links": []
-              },
-              {
-                "localized_name": "cropped_masks",
-                "name": "cropped_masks",
-                "type": "MASK",
-                "links": [
-                  111
-                ]
-              },
-              {
-                "localized_name": "combined_crop_image",
-                "name": "combined_crop_image",
-                "type": "IMAGE",
-                "links": [
-                  115,
-                  141,
-                  149
-                ]
-              },
-              {
-                "localized_name": "combined_crop_masks",
-                "name": "combined_crop_masks",
-                "type": "MASK",
-                "links": [
-                  112,
-                  116,
-                  156
-                ]
-              },
-              {
-                "localized_name": "bboxes",
-                "name": "bboxes",
-                "type": "BBOX",
-                "links": [
-                  113
-                ]
-              },
-              {
-                "localized_name": "combined_bounding_box",
-                "name": "combined_bounding_box",
-                "type": "BBOX",
-                "links": [
-                  114
-                ]
-              },
-              {
-                "localized_name": "bbox_width",
-                "name": "bbox_width",
-                "type": "INT",
-                "links": null
-              },
-              {
-                "localized_name": "bbox_height",
-                "name": "bbox_height",
-                "type": "INT",
-                "links": null
-              }
-            ],
-            "properties": {
-              "cnr_id": "comfyui-kjnodes",
-              "ver": "1.2.0",
-              "Node name for S&R": "BatchCropFromMaskAdvanced"
-            },
-            "widgets_values": [
-              1,
-              0.7
-            ]
-          },
-          {
-            "id": 1,
-            "type": "SAM3Segmentation",
-            "pos": [
-              1009.1766858085575,
-              849.1217333818615
-            ],
-            "size": [
-              270,
-              262
-            ],
-            "flags": {},
-            "order": 2,
-            "mode": 0,
-            "inputs": [
-              {
-                "localized_name": "image",
-                "name": "image",
-                "type": "IMAGE",
-                "link": 1
-              }
-            ],
-            "outputs": [
-              {
-                "localized_name": "segmented_image",
-                "name": "segmented_image",
-                "type": "IMAGE",
-                "links": [
-                  2
-                ]
-              },
-              {
-                "localized_name": "masks",
-                "name": "masks",
-                "type": "MASK",
-                "links": [
-                  169,
-                  203,
-                  322
-                ]
-              },
-              {
-                "localized_name": "mask_combined",
-                "name": "mask_combined",
-                "type": "MASK",
-                "links": []
-              },
-              {
-                "localized_name": "segs",
-                "name": "segs",
-                "type": "SEGS",
-                "links": null
-              }
-            ],
-            "properties": {
-              "cnr_id": "comfyui_sam3",
-              "ver": "0.2.0",
-              "Node name for S&R": "SAM3Segmentation"
-            },
-            "widgets_values": [
-              "person",
-              0.6,
-              150,
-              150,
-              false,
-              false,
-              ""
-            ]
           },
           {
             "id": 20,
@@ -4304,7 +3842,7 @@
               "Write a brief description of the person in the image. Keep it concise. Do not use full sentences, output only a comma delimited list of attributes and attire. Keep the comma delimited list limited to adjectives, nouns, and verbs related to visible attributes like clothing, eye color, skin color, hair color, accessories, facial expressions, etc.\nOnly describe the character in the image, not the setting or background. Do not mention things that are not visible. Rather than saying \"no visible eyes\" or \"no accessories\", omit the detail altogether, only report seen attributes.\nExample:\n\"Red hair, green eyes, smiling, earrings, freckles, black dress, white shoes, bell choker, exposed breasts, pink nipples\"",
               512,
               true,
-              2139359796,
+              2121841753,
               "randomize"
             ],
             "color": "#28403f",
@@ -4456,7 +3994,7 @@
               "Node name for S&R": "KSampler"
             },
             "widgets_values": [
-              243571052311021,
+              694600545545378,
               "randomize",
               28,
               4,
@@ -4619,7 +4157,7 @@
               "Node name for S&R": "PrimitiveInt"
             },
             "widgets_values": [
-              2048,
+              1536,
               "fixed"
             ]
           },
@@ -4779,6 +4317,560 @@
               true,
               false
             ]
+          },
+          {
+            "id": 1,
+            "type": "SAM3Segmentation",
+            "pos": [
+              1009.1766858085575,
+              849.1217333818615
+            ],
+            "size": [
+              270,
+              262
+            ],
+            "flags": {},
+            "order": 2,
+            "mode": 0,
+            "inputs": [
+              {
+                "localized_name": "image",
+                "name": "image",
+                "type": "IMAGE",
+                "link": 1
+              }
+            ],
+            "outputs": [
+              {
+                "localized_name": "segmented_image",
+                "name": "segmented_image",
+                "type": "IMAGE",
+                "links": [
+                  2
+                ]
+              },
+              {
+                "localized_name": "masks",
+                "name": "masks",
+                "type": "MASK",
+                "links": [
+                  169,
+                  203,
+                  322
+                ]
+              },
+              {
+                "localized_name": "mask_combined",
+                "name": "mask_combined",
+                "type": "MASK",
+                "links": []
+              },
+              {
+                "localized_name": "segs",
+                "name": "segs",
+                "type": "SEGS",
+                "links": null
+              }
+            ],
+            "properties": {
+              "cnr_id": "comfyui_sam3",
+              "ver": "0.2.0",
+              "Node name for S&R": "SAM3Segmentation"
+            },
+            "widgets_values": [
+              "person",
+              0.6,
+              25,
+              25,
+              false,
+              false,
+              ""
+            ]
+          },
+          {
+            "id": 59,
+            "type": "ResizeMask",
+            "pos": [
+              2572.2849437050836,
+              1081.161678422197
+            ],
+            "size": [
+              270,
+              194
+            ],
+            "flags": {},
+            "order": 22,
+            "mode": 0,
+            "inputs": [
+              {
+                "localized_name": "mask",
+                "name": "mask",
+                "type": "MASK",
+                "link": 156
+              },
+              {
+                "localized_name": "width",
+                "name": "width",
+                "type": "INT",
+                "widget": {
+                  "name": "width"
+                },
+                "link": 164
+              },
+              {
+                "localized_name": "height",
+                "name": "height",
+                "type": "INT",
+                "widget": {
+                  "name": "height"
+                },
+                "link": 163
+              }
+            ],
+            "outputs": [
+              {
+                "localized_name": "mask",
+                "name": "mask",
+                "type": "MASK",
+                "links": [
+                  157
+                ]
+              },
+              {
+                "localized_name": "width",
+                "name": "width",
+                "type": "INT",
+                "links": null
+              },
+              {
+                "localized_name": "height",
+                "name": "height",
+                "type": "INT",
+                "links": null
+              }
+            ],
+            "properties": {
+              "cnr_id": "comfyui-kjnodes",
+              "ver": "1.2.0",
+              "Node name for S&R": "ResizeMask"
+            },
+            "widgets_values": [
+              512,
+              512,
+              false,
+              "lanczos",
+              "disabled"
+            ]
+          },
+          {
+            "id": 50,
+            "type": "GetImageSize",
+            "pos": [
+              1813.6251272404902,
+              998.6205974127038
+            ],
+            "size": [
+              210,
+              136
+            ],
+            "flags": {},
+            "order": 19,
+            "mode": 0,
+            "inputs": [
+              {
+                "localized_name": "image",
+                "name": "image",
+                "type": "IMAGE",
+                "link": 141
+              }
+            ],
+            "outputs": [
+              {
+                "localized_name": "width",
+                "name": "width",
+                "type": "INT",
+                "links": [
+                  142,
+                  146,
+                  158
+                ]
+              },
+              {
+                "localized_name": "height",
+                "name": "height",
+                "type": "INT",
+                "links": [
+                  143,
+                  147,
+                  162
+                ]
+              },
+              {
+                "localized_name": "batch_size",
+                "name": "batch_size",
+                "type": "INT",
+                "links": null
+              }
+            ],
+            "properties": {
+              "cnr_id": "comfy-core",
+              "ver": "0.6.0",
+              "Node name for S&R": "GetImageSize"
+            },
+            "widgets_values": []
+          },
+          {
+            "id": 60,
+            "type": "MathExpression|pysssss",
+            "pos": [
+              2072.6107335825427,
+              1067.527914313313
+            ],
+            "size": [
+              210,
+              128
+            ],
+            "flags": {},
+            "order": 23,
+            "mode": 0,
+            "inputs": [
+              {
+                "localized_name": "a",
+                "name": "a",
+                "shape": 7,
+                "type": "INT,FLOAT,IMAGE,LATENT",
+                "link": 158
+              },
+              {
+                "localized_name": "b",
+                "name": "b",
+                "shape": 7,
+                "type": "INT,FLOAT,IMAGE,LATENT",
+                "link": 159
+              },
+              {
+                "localized_name": "c",
+                "name": "c",
+                "shape": 7,
+                "type": "INT,FLOAT,IMAGE,LATENT",
+                "link": null
+              }
+            ],
+            "outputs": [
+              {
+                "localized_name": "INT",
+                "name": "INT",
+                "type": "INT",
+                "links": [
+                  164
+                ]
+              },
+              {
+                "localized_name": "FLOAT",
+                "name": "FLOAT",
+                "type": "FLOAT",
+                "links": null
+              }
+            ],
+            "title": "Calculate Mask Width",
+            "properties": {
+              "cnr_id": "comfyui-custom-scripts",
+              "ver": "1.2.5",
+              "Node name for S&R": "MathExpression|pysssss"
+            },
+            "widgets_values": [
+              "a*b"
+            ]
+          },
+          {
+            "id": 61,
+            "type": "MathExpression|pysssss",
+            "pos": [
+              2303.8002577595803,
+              1066.734955644435
+            ],
+            "size": [
+              210,
+              128
+            ],
+            "flags": {},
+            "order": 24,
+            "mode": 0,
+            "inputs": [
+              {
+                "localized_name": "a",
+                "name": "a",
+                "shape": 7,
+                "type": "INT,FLOAT,IMAGE,LATENT",
+                "link": 161
+              },
+              {
+                "localized_name": "b",
+                "name": "b",
+                "shape": 7,
+                "type": "INT,FLOAT,IMAGE,LATENT",
+                "link": 162
+              },
+              {
+                "localized_name": "c",
+                "name": "c",
+                "shape": 7,
+                "type": "INT,FLOAT,IMAGE,LATENT",
+                "link": null
+              }
+            ],
+            "outputs": [
+              {
+                "localized_name": "INT",
+                "name": "INT",
+                "type": "INT",
+                "links": [
+                  163
+                ]
+              },
+              {
+                "localized_name": "FLOAT",
+                "name": "FLOAT",
+                "type": "FLOAT",
+                "links": null
+              }
+            ],
+            "title": "Calculate Mask Height",
+            "properties": {
+              "cnr_id": "comfyui-custom-scripts",
+              "ver": "1.2.5",
+              "Node name for S&R": "MathExpression|pysssss"
+            },
+            "widgets_values": [
+              "a*b"
+            ]
+          },
+          {
+            "id": 39,
+            "type": "BatchCropFromMaskAdvanced",
+            "pos": [
+              1425.2952421529274,
+              858.6987782381365
+            ],
+            "size": [
+              335.73333740234375,
+              242
+            ],
+            "flags": {},
+            "order": 15,
+            "mode": 0,
+            "inputs": [
+              {
+                "localized_name": "original_images",
+                "name": "original_images",
+                "type": "IMAGE",
+                "link": 325
+              },
+              {
+                "localized_name": "masks",
+                "name": "masks",
+                "type": "MASK",
+                "link": 338
+              }
+            ],
+            "outputs": [
+              {
+                "localized_name": "original_images",
+                "name": "original_images",
+                "type": "IMAGE",
+                "links": [
+                  108
+                ]
+              },
+              {
+                "localized_name": "cropped_images",
+                "name": "cropped_images",
+                "type": "IMAGE",
+                "links": []
+              },
+              {
+                "localized_name": "cropped_masks",
+                "name": "cropped_masks",
+                "type": "MASK",
+                "links": [
+                  111
+                ]
+              },
+              {
+                "localized_name": "combined_crop_image",
+                "name": "combined_crop_image",
+                "type": "IMAGE",
+                "links": [
+                  115,
+                  141,
+                  149
+                ]
+              },
+              {
+                "localized_name": "combined_crop_masks",
+                "name": "combined_crop_masks",
+                "type": "MASK",
+                "links": [
+                  112,
+                  116,
+                  156
+                ]
+              },
+              {
+                "localized_name": "bboxes",
+                "name": "bboxes",
+                "type": "BBOX",
+                "links": [
+                  113
+                ]
+              },
+              {
+                "localized_name": "combined_bounding_box",
+                "name": "combined_bounding_box",
+                "type": "BBOX",
+                "links": [
+                  114
+                ]
+              },
+              {
+                "localized_name": "bbox_width",
+                "name": "bbox_width",
+                "type": "INT",
+                "links": null
+              },
+              {
+                "localized_name": "bbox_height",
+                "name": "bbox_height",
+                "type": "INT",
+                "links": null
+              }
+            ],
+            "properties": {
+              "cnr_id": "comfyui-kjnodes",
+              "ver": "1.2.0",
+              "Node name for S&R": "BatchCropFromMaskAdvanced"
+            },
+            "widgets_values": [
+              1,
+              0.7
+            ]
+          },
+          {
+            "id": 107,
+            "type": "GetImageRangeFromBatch",
+            "pos": [
+              1501.5484993150317,
+              617.5358016059444
+            ],
+            "size": [
+              316.5806700303996,
+              107.10040895641089
+            ],
+            "flags": {},
+            "order": 31,
+            "mode": 0,
+            "inputs": [
+              {
+                "localized_name": "images",
+                "name": "images",
+                "shape": 7,
+                "type": "IMAGE",
+                "link": null
+              },
+              {
+                "localized_name": "masks",
+                "name": "masks",
+                "shape": 7,
+                "type": "MASK",
+                "link": 322
+              },
+              {
+                "localized_name": "start_index",
+                "name": "start_index",
+                "type": "INT",
+                "widget": {
+                  "name": "start_index"
+                },
+                "link": 315
+              }
+            ],
+            "outputs": [
+              {
+                "localized_name": "IMAGE",
+                "name": "IMAGE",
+                "type": "IMAGE",
+                "links": null
+              },
+              {
+                "localized_name": "MASK",
+                "name": "MASK",
+                "type": "MASK",
+                "links": [
+                  335
+                ]
+              }
+            ],
+            "properties": {
+              "cnr_id": "comfyui-kjnodes",
+              "ver": "1.2.0",
+              "Node name for S&R": "GetImageRangeFromBatch"
+            },
+            "widgets_values": [
+              0,
+              1
+            ]
+          },
+          {
+            "id": 112,
+            "type": "GrowMask",
+            "pos": [
+              1832.6544005369121,
+              627.4390507940712
+            ],
+            "size": [
+              270,
+              82
+            ],
+            "flags": {},
+            "order": 33,
+            "mode": 0,
+            "inputs": [
+              {
+                "localized_name": "mask",
+                "name": "mask",
+                "type": "MASK",
+                "link": 335
+              },
+              {
+                "localized_name": "expand",
+                "name": "expand",
+                "type": "INT",
+                "widget": {
+                  "name": "expand"
+                },
+                "link": 337
+              }
+            ],
+            "outputs": [
+              {
+                "localized_name": "MASK",
+                "name": "MASK",
+                "type": "MASK",
+                "links": [
+                  336,
+                  338
+                ]
+              }
+            ],
+            "properties": {
+              "cnr_id": "comfy-core",
+              "ver": "0.6.0",
+              "Node name for S&R": "GrowMask"
+            },
+            "widgets_values": [
+              12,
+              true
+            ]
           }
         ],
         "groups": [
@@ -4812,10 +4904,10 @@
             "id": 7,
             "title": "2) Loop Images (Open Loop)",
             "bounding": [
-              1306.921595230666,
-              493.49471264292293,
-              895.0832254536285,
-              264.01187847189266
+              984.6107628267731,
+              499.2371067929187,
+              1153.3501110261582,
+              261.389879633593
             ],
             "color": "#a1309b",
             "font_size": 24,
@@ -4911,14 +5003,6 @@
             "target_id": 39,
             "target_slot": 0,
             "type": "IMAGE"
-          },
-          {
-            "id": 316,
-            "origin_id": 107,
-            "origin_slot": 1,
-            "target_id": 39,
-            "target_slot": 1,
-            "type": "MASK"
           },
           {
             "id": 116,
@@ -5119,14 +5203,6 @@
             "target_id": 95,
             "target_slot": 0,
             "type": "IMAGE"
-          },
-          {
-            "id": 323,
-            "origin_id": 107,
-            "origin_slot": 1,
-            "target_id": 95,
-            "target_slot": 1,
-            "type": "MASK"
           },
           {
             "id": 66,
@@ -5399,6 +5475,38 @@
             "target_id": 40,
             "target_slot": 1,
             "type": "IMAGE"
+          },
+          {
+            "id": 335,
+            "origin_id": 107,
+            "origin_slot": 1,
+            "target_id": 112,
+            "target_slot": 0,
+            "type": "MASK"
+          },
+          {
+            "id": 336,
+            "origin_id": 112,
+            "origin_slot": 0,
+            "target_id": 95,
+            "target_slot": 1,
+            "type": "MASK"
+          },
+          {
+            "id": 337,
+            "origin_id": -10,
+            "origin_slot": 4,
+            "target_id": 112,
+            "target_slot": 1,
+            "type": "INT"
+          },
+          {
+            "id": 338,
+            "origin_id": 112,
+            "origin_slot": 0,
+            "target_id": 39,
+            "target_slot": 1,
+            "type": "MASK"
           }
         ],
         "extra": {
@@ -5406,12 +5514,12 @@
         }
       },
       {
-        "id": "ff8fd17e-575a-406b-af48-ae0caca0f6ae",
+        "id": "b4457d6f-f892-46b5-bc8f-21a1c7fb5c48",
         "version": 1,
         "state": {
           "lastGroupId": 8,
-          "lastNodeId": 111,
-          "lastLinkId": 334,
+          "lastNodeId": 112,
+          "lastLinkId": 338,
           "lastRerouteId": 0
         },
         "revision": 0,
@@ -5423,7 +5531,7 @@
             806.7479357092758,
             831.269798557474,
             186.64999389648438,
-            120
+            140
           ]
         },
         "outputNode": {
@@ -5487,6 +5595,19 @@
             "pos": [
               973.3979296057602,
               911.269798557474
+            ]
+          },
+          {
+            "id": "f7bb179f-6b28-490e-9a20-6ea22d5bb93f",
+            "name": "expand",
+            "type": "INT",
+            "linkIds": [
+              337
+            ],
+            "label": "grow mask",
+            "pos": [
+              973.3979296057602,
+              931.269798557474
             ]
           }
         ],
@@ -5629,194 +5750,11 @@
             "widgets_values": []
           },
           {
-            "id": 50,
-            "type": "GetImageSize",
-            "pos": [
-              1828.7937155612335,
-              987.785891469317
-            ],
-            "size": [
-              210,
-              136
-            ],
-            "flags": {},
-            "order": 19,
-            "mode": 0,
-            "inputs": [
-              {
-                "localized_name": "image",
-                "name": "image",
-                "type": "IMAGE",
-                "link": 141
-              }
-            ],
-            "outputs": [
-              {
-                "localized_name": "width",
-                "name": "width",
-                "type": "INT",
-                "links": [
-                  142,
-                  146,
-                  158
-                ]
-              },
-              {
-                "localized_name": "height",
-                "name": "height",
-                "type": "INT",
-                "links": [
-                  143,
-                  147,
-                  162
-                ]
-              },
-              {
-                "localized_name": "batch_size",
-                "name": "batch_size",
-                "type": "INT",
-                "links": null
-              }
-            ],
-            "properties": {
-              "cnr_id": "comfy-core",
-              "ver": "0.6.0",
-              "Node name for S&R": "GetImageSize"
-            },
-            "widgets_values": []
-          },
-          {
-            "id": 60,
-            "type": "MathExpression|pysssss",
-            "pos": [
-              2069.3603217995246,
-              1081.613032039718
-            ],
-            "size": [
-              210,
-              128
-            ],
-            "flags": {},
-            "order": 23,
-            "mode": 0,
-            "inputs": [
-              {
-                "localized_name": "a",
-                "name": "a",
-                "shape": 7,
-                "type": "INT,FLOAT,IMAGE,LATENT",
-                "link": 158
-              },
-              {
-                "localized_name": "b",
-                "name": "b",
-                "shape": 7,
-                "type": "INT,FLOAT,IMAGE,LATENT",
-                "link": 159
-              },
-              {
-                "localized_name": "c",
-                "name": "c",
-                "shape": 7,
-                "type": "INT,FLOAT,IMAGE,LATENT",
-                "link": null
-              }
-            ],
-            "outputs": [
-              {
-                "localized_name": "INT",
-                "name": "INT",
-                "type": "INT",
-                "links": [
-                  164
-                ]
-              },
-              {
-                "localized_name": "FLOAT",
-                "name": "FLOAT",
-                "type": "FLOAT",
-                "links": null
-              }
-            ],
-            "title": "Calculate Mask Width",
-            "properties": {
-              "cnr_id": "comfyui-custom-scripts",
-              "ver": "1.2.5",
-              "Node name for S&R": "MathExpression|pysssss"
-            },
-            "widgets_values": [
-              "a*b"
-            ]
-          },
-          {
-            "id": 61,
-            "type": "MathExpression|pysssss",
-            "pos": [
-              2305.9671989482576,
-              1081.9035439651773
-            ],
-            "size": [
-              210,
-              128
-            ],
-            "flags": {},
-            "order": 24,
-            "mode": 0,
-            "inputs": [
-              {
-                "localized_name": "a",
-                "name": "a",
-                "shape": 7,
-                "type": "INT,FLOAT,IMAGE,LATENT",
-                "link": 161
-              },
-              {
-                "localized_name": "b",
-                "name": "b",
-                "shape": 7,
-                "type": "INT,FLOAT,IMAGE,LATENT",
-                "link": 162
-              },
-              {
-                "localized_name": "c",
-                "name": "c",
-                "shape": 7,
-                "type": "INT,FLOAT,IMAGE,LATENT",
-                "link": null
-              }
-            ],
-            "outputs": [
-              {
-                "localized_name": "INT",
-                "name": "INT",
-                "type": "INT",
-                "links": [
-                  163
-                ]
-              },
-              {
-                "localized_name": "FLOAT",
-                "name": "FLOAT",
-                "type": "FLOAT",
-                "links": null
-              }
-            ],
-            "title": "Calculate Mask Height",
-            "properties": {
-              "cnr_id": "comfyui-custom-scripts",
-              "ver": "1.2.5",
-              "Node name for S&R": "MathExpression|pysssss"
-            },
-            "widgets_values": [
-              "a*b"
-            ]
-          },
-          {
             "id": 76,
             "type": "GetMaskSizeAndCount",
             "pos": [
-              1323.1555265494915,
-              577.8724188950081
+              1000.8446941455987,
+              583.6148130450025
             ],
             "size": [
               191.26666870117188,
@@ -5841,21 +5779,21 @@
                 "links": []
               },
               {
-                "label": "2048 width",
+                "label": "1920 width",
                 "localized_name": "width",
                 "name": "width",
                 "type": "INT",
                 "links": []
               },
               {
-                "label": "1512 height",
+                "label": "1296 height",
                 "localized_name": "height",
                 "name": "height",
                 "type": "INT",
                 "links": []
               },
               {
-                "label": "1 count",
+                "label": "2 count",
                 "localized_name": "count",
                 "name": "count",
                 "type": "INT",
@@ -5875,8 +5813,8 @@
             "id": 104,
             "type": "CyberEve_SingleImageLoopOpen",
             "pos": [
-              1530.8706798633877,
-              571.4477005810153
+              1208.5598474594974,
+              577.1900947310097
             ],
             "size": [
               279.09999694824216,
@@ -5959,72 +5897,6 @@
             },
             "widgets_values": [
               5
-            ]
-          },
-          {
-            "id": 107,
-            "type": "GetImageRangeFromBatch",
-            "pos": [
-              1843.8818683023035,
-              608.0987727292526
-            ],
-            "size": [
-              316.5806700303996,
-              107.10040895641089
-            ],
-            "flags": {},
-            "order": 31,
-            "mode": 0,
-            "inputs": [
-              {
-                "localized_name": "images",
-                "name": "images",
-                "shape": 7,
-                "type": "IMAGE",
-                "link": null
-              },
-              {
-                "localized_name": "masks",
-                "name": "masks",
-                "shape": 7,
-                "type": "MASK",
-                "link": 322
-              },
-              {
-                "localized_name": "start_index",
-                "name": "start_index",
-                "type": "INT",
-                "widget": {
-                  "name": "start_index"
-                },
-                "link": 315
-              }
-            ],
-            "outputs": [
-              {
-                "localized_name": "IMAGE",
-                "name": "IMAGE",
-                "type": "IMAGE",
-                "links": null
-              },
-              {
-                "localized_name": "MASK",
-                "name": "MASK",
-                "type": "MASK",
-                "links": [
-                  316,
-                  323
-                ]
-              }
-            ],
-            "properties": {
-              "cnr_id": "comfyui-kjnodes",
-              "ver": "1.2.0",
-              "Node name for S&R": "GetImageRangeFromBatch"
-            },
-            "widgets_values": [
-              0,
-              1
             ]
           },
           {
@@ -6116,7 +5988,7 @@
                 "localized_name": "mask",
                 "name": "mask",
                 "type": "MASK",
-                "link": 323
+                "link": 336
               }
             ],
             "outputs": [
@@ -6528,264 +6400,10 @@
               "Node name for S&R": "CLIPTextEncode"
             },
             "widgets_values": [
-              "jpeg artifacts, worst quality, low quality, lowres, signature, watermark, artist_name, twitter_username, patreon_logo, letterboxed, censored"
+              "jpeg artifacts, worst quality, low quality, lowres, signature, watermark, artist_name, twitter_username, patreon_logo, letterboxed, censored, shiny skin"
             ],
             "color": "#322",
             "bgcolor": "#533"
-          },
-          {
-            "id": 59,
-            "type": "ResizeMask",
-            "pos": [
-              2545.198178846615,
-              1015.0699721675344
-            ],
-            "size": [
-              270,
-              194
-            ],
-            "flags": {},
-            "order": 22,
-            "mode": 0,
-            "inputs": [
-              {
-                "localized_name": "mask",
-                "name": "mask",
-                "type": "MASK",
-                "link": 156
-              },
-              {
-                "localized_name": "width",
-                "name": "width",
-                "type": "INT",
-                "widget": {
-                  "name": "width"
-                },
-                "link": 164
-              },
-              {
-                "localized_name": "height",
-                "name": "height",
-                "type": "INT",
-                "widget": {
-                  "name": "height"
-                },
-                "link": 163
-              }
-            ],
-            "outputs": [
-              {
-                "localized_name": "mask",
-                "name": "mask",
-                "type": "MASK",
-                "links": [
-                  157
-                ]
-              },
-              {
-                "localized_name": "width",
-                "name": "width",
-                "type": "INT",
-                "links": null
-              },
-              {
-                "localized_name": "height",
-                "name": "height",
-                "type": "INT",
-                "links": null
-              }
-            ],
-            "properties": {
-              "cnr_id": "comfyui-kjnodes",
-              "ver": "1.2.0",
-              "Node name for S&R": "ResizeMask"
-            },
-            "widgets_values": [
-              512,
-              512,
-              false,
-              "lanczos",
-              "disabled"
-            ]
-          },
-          {
-            "id": 39,
-            "type": "BatchCropFromMaskAdvanced",
-            "pos": [
-              1432.6954920971843,
-              859.4388032325628
-            ],
-            "size": [
-              335.73333740234375,
-              242
-            ],
-            "flags": {},
-            "order": 15,
-            "mode": 0,
-            "inputs": [
-              {
-                "localized_name": "original_images",
-                "name": "original_images",
-                "type": "IMAGE",
-                "link": 325
-              },
-              {
-                "localized_name": "masks",
-                "name": "masks",
-                "type": "MASK",
-                "link": 316
-              }
-            ],
-            "outputs": [
-              {
-                "localized_name": "original_images",
-                "name": "original_images",
-                "type": "IMAGE",
-                "links": [
-                  108
-                ]
-              },
-              {
-                "localized_name": "cropped_images",
-                "name": "cropped_images",
-                "type": "IMAGE",
-                "links": []
-              },
-              {
-                "localized_name": "cropped_masks",
-                "name": "cropped_masks",
-                "type": "MASK",
-                "links": [
-                  111
-                ]
-              },
-              {
-                "localized_name": "combined_crop_image",
-                "name": "combined_crop_image",
-                "type": "IMAGE",
-                "links": [
-                  115,
-                  141,
-                  149
-                ]
-              },
-              {
-                "localized_name": "combined_crop_masks",
-                "name": "combined_crop_masks",
-                "type": "MASK",
-                "links": [
-                  112,
-                  116,
-                  156
-                ]
-              },
-              {
-                "localized_name": "bboxes",
-                "name": "bboxes",
-                "type": "BBOX",
-                "links": [
-                  113
-                ]
-              },
-              {
-                "localized_name": "combined_bounding_box",
-                "name": "combined_bounding_box",
-                "type": "BBOX",
-                "links": [
-                  114
-                ]
-              },
-              {
-                "localized_name": "bbox_width",
-                "name": "bbox_width",
-                "type": "INT",
-                "links": null
-              },
-              {
-                "localized_name": "bbox_height",
-                "name": "bbox_height",
-                "type": "INT",
-                "links": null
-              }
-            ],
-            "properties": {
-              "cnr_id": "comfyui-kjnodes",
-              "ver": "1.2.0",
-              "Node name for S&R": "BatchCropFromMaskAdvanced"
-            },
-            "widgets_values": [
-              1,
-              0.7
-            ]
-          },
-          {
-            "id": 1,
-            "type": "SAM3Segmentation",
-            "pos": [
-              1009.1766858085575,
-              849.1217333818615
-            ],
-            "size": [
-              270,
-              262
-            ],
-            "flags": {},
-            "order": 2,
-            "mode": 0,
-            "inputs": [
-              {
-                "localized_name": "image",
-                "name": "image",
-                "type": "IMAGE",
-                "link": 1
-              }
-            ],
-            "outputs": [
-              {
-                "localized_name": "segmented_image",
-                "name": "segmented_image",
-                "type": "IMAGE",
-                "links": [
-                  2
-                ]
-              },
-              {
-                "localized_name": "masks",
-                "name": "masks",
-                "type": "MASK",
-                "links": [
-                  169,
-                  203,
-                  322
-                ]
-              },
-              {
-                "localized_name": "mask_combined",
-                "name": "mask_combined",
-                "type": "MASK",
-                "links": []
-              },
-              {
-                "localized_name": "segs",
-                "name": "segs",
-                "type": "SEGS",
-                "links": null
-              }
-            ],
-            "properties": {
-              "cnr_id": "comfyui_sam3",
-              "ver": "0.2.0",
-              "Node name for S&R": "SAM3Segmentation"
-            },
-            "widgets_values": [
-              "face",
-              0.6,
-              150,
-              150,
-              false,
-              false,
-              ""
-            ]
           },
           {
             "id": 20,
@@ -6841,7 +6459,7 @@
               "Write a brief description of the person in the image. Keep it concise. Do not use full sentences, output only a comma delimited list of attributes and attire. Keep the comma delimited list limited to adjectives, nouns, and verbs related to visible attributes like clothing, eye color, skin color, hair color, accessories, facial expressions, etc.\nOnly describe the character in the image, not the setting or background. Do not mention things that are not visible. Rather than saying \"no visible eyes\" or \"no accessories\", omit the detail altogether, only report seen attributes.\nExample:\n\"Red hair, green eyes, smiling, earrings, freckles, black dress, white shoes, bell choker, exposed breasts, pink nipples\"",
               512,
               true,
-              420752205,
+              757420063,
               "randomize"
             ],
             "color": "#28403f",
@@ -6993,9 +6611,9 @@
               "Node name for S&R": "KSampler"
             },
             "widgets_values": [
-              167733695691077,
+              946021615844780,
               "randomize",
-              36,
+              28,
               4,
               "dpmpp_3m_sde",
               "karras",
@@ -7156,7 +6774,7 @@
               "Node name for S&R": "PrimitiveInt"
             },
             "widgets_values": [
-              1280,
+              1536,
               "fixed"
             ]
           },
@@ -7316,6 +6934,560 @@
               true,
               false
             ]
+          },
+          {
+            "id": 1,
+            "type": "SAM3Segmentation",
+            "pos": [
+              1009.1766858085575,
+              849.1217333818615
+            ],
+            "size": [
+              270,
+              262
+            ],
+            "flags": {},
+            "order": 2,
+            "mode": 0,
+            "inputs": [
+              {
+                "localized_name": "image",
+                "name": "image",
+                "type": "IMAGE",
+                "link": 1
+              }
+            ],
+            "outputs": [
+              {
+                "localized_name": "segmented_image",
+                "name": "segmented_image",
+                "type": "IMAGE",
+                "links": [
+                  2
+                ]
+              },
+              {
+                "localized_name": "masks",
+                "name": "masks",
+                "type": "MASK",
+                "links": [
+                  169,
+                  203,
+                  322
+                ]
+              },
+              {
+                "localized_name": "mask_combined",
+                "name": "mask_combined",
+                "type": "MASK",
+                "links": []
+              },
+              {
+                "localized_name": "segs",
+                "name": "segs",
+                "type": "SEGS",
+                "links": null
+              }
+            ],
+            "properties": {
+              "cnr_id": "comfyui_sam3",
+              "ver": "0.2.0",
+              "Node name for S&R": "SAM3Segmentation"
+            },
+            "widgets_values": [
+              "face",
+              0.6,
+              25,
+              25,
+              false,
+              false,
+              ""
+            ]
+          },
+          {
+            "id": 59,
+            "type": "ResizeMask",
+            "pos": [
+              2572.2849437050836,
+              1081.161678422197
+            ],
+            "size": [
+              270,
+              194
+            ],
+            "flags": {},
+            "order": 22,
+            "mode": 0,
+            "inputs": [
+              {
+                "localized_name": "mask",
+                "name": "mask",
+                "type": "MASK",
+                "link": 156
+              },
+              {
+                "localized_name": "width",
+                "name": "width",
+                "type": "INT",
+                "widget": {
+                  "name": "width"
+                },
+                "link": 164
+              },
+              {
+                "localized_name": "height",
+                "name": "height",
+                "type": "INT",
+                "widget": {
+                  "name": "height"
+                },
+                "link": 163
+              }
+            ],
+            "outputs": [
+              {
+                "localized_name": "mask",
+                "name": "mask",
+                "type": "MASK",
+                "links": [
+                  157
+                ]
+              },
+              {
+                "localized_name": "width",
+                "name": "width",
+                "type": "INT",
+                "links": null
+              },
+              {
+                "localized_name": "height",
+                "name": "height",
+                "type": "INT",
+                "links": null
+              }
+            ],
+            "properties": {
+              "cnr_id": "comfyui-kjnodes",
+              "ver": "1.2.0",
+              "Node name for S&R": "ResizeMask"
+            },
+            "widgets_values": [
+              512,
+              512,
+              false,
+              "lanczos",
+              "disabled"
+            ]
+          },
+          {
+            "id": 50,
+            "type": "GetImageSize",
+            "pos": [
+              1813.6251272404902,
+              998.6205974127038
+            ],
+            "size": [
+              210,
+              136
+            ],
+            "flags": {},
+            "order": 19,
+            "mode": 0,
+            "inputs": [
+              {
+                "localized_name": "image",
+                "name": "image",
+                "type": "IMAGE",
+                "link": 141
+              }
+            ],
+            "outputs": [
+              {
+                "localized_name": "width",
+                "name": "width",
+                "type": "INT",
+                "links": [
+                  142,
+                  146,
+                  158
+                ]
+              },
+              {
+                "localized_name": "height",
+                "name": "height",
+                "type": "INT",
+                "links": [
+                  143,
+                  147,
+                  162
+                ]
+              },
+              {
+                "localized_name": "batch_size",
+                "name": "batch_size",
+                "type": "INT",
+                "links": null
+              }
+            ],
+            "properties": {
+              "cnr_id": "comfy-core",
+              "ver": "0.6.0",
+              "Node name for S&R": "GetImageSize"
+            },
+            "widgets_values": []
+          },
+          {
+            "id": 60,
+            "type": "MathExpression|pysssss",
+            "pos": [
+              2072.6107335825427,
+              1067.527914313313
+            ],
+            "size": [
+              210,
+              128
+            ],
+            "flags": {},
+            "order": 23,
+            "mode": 0,
+            "inputs": [
+              {
+                "localized_name": "a",
+                "name": "a",
+                "shape": 7,
+                "type": "INT,FLOAT,IMAGE,LATENT",
+                "link": 158
+              },
+              {
+                "localized_name": "b",
+                "name": "b",
+                "shape": 7,
+                "type": "INT,FLOAT,IMAGE,LATENT",
+                "link": 159
+              },
+              {
+                "localized_name": "c",
+                "name": "c",
+                "shape": 7,
+                "type": "INT,FLOAT,IMAGE,LATENT",
+                "link": null
+              }
+            ],
+            "outputs": [
+              {
+                "localized_name": "INT",
+                "name": "INT",
+                "type": "INT",
+                "links": [
+                  164
+                ]
+              },
+              {
+                "localized_name": "FLOAT",
+                "name": "FLOAT",
+                "type": "FLOAT",
+                "links": null
+              }
+            ],
+            "title": "Calculate Mask Width",
+            "properties": {
+              "cnr_id": "comfyui-custom-scripts",
+              "ver": "1.2.5",
+              "Node name for S&R": "MathExpression|pysssss"
+            },
+            "widgets_values": [
+              "a*b"
+            ]
+          },
+          {
+            "id": 61,
+            "type": "MathExpression|pysssss",
+            "pos": [
+              2303.8002577595803,
+              1066.734955644435
+            ],
+            "size": [
+              210,
+              128
+            ],
+            "flags": {},
+            "order": 24,
+            "mode": 0,
+            "inputs": [
+              {
+                "localized_name": "a",
+                "name": "a",
+                "shape": 7,
+                "type": "INT,FLOAT,IMAGE,LATENT",
+                "link": 161
+              },
+              {
+                "localized_name": "b",
+                "name": "b",
+                "shape": 7,
+                "type": "INT,FLOAT,IMAGE,LATENT",
+                "link": 162
+              },
+              {
+                "localized_name": "c",
+                "name": "c",
+                "shape": 7,
+                "type": "INT,FLOAT,IMAGE,LATENT",
+                "link": null
+              }
+            ],
+            "outputs": [
+              {
+                "localized_name": "INT",
+                "name": "INT",
+                "type": "INT",
+                "links": [
+                  163
+                ]
+              },
+              {
+                "localized_name": "FLOAT",
+                "name": "FLOAT",
+                "type": "FLOAT",
+                "links": null
+              }
+            ],
+            "title": "Calculate Mask Height",
+            "properties": {
+              "cnr_id": "comfyui-custom-scripts",
+              "ver": "1.2.5",
+              "Node name for S&R": "MathExpression|pysssss"
+            },
+            "widgets_values": [
+              "a*b"
+            ]
+          },
+          {
+            "id": 39,
+            "type": "BatchCropFromMaskAdvanced",
+            "pos": [
+              1425.2952421529274,
+              858.6987782381365
+            ],
+            "size": [
+              335.73333740234375,
+              242
+            ],
+            "flags": {},
+            "order": 15,
+            "mode": 0,
+            "inputs": [
+              {
+                "localized_name": "original_images",
+                "name": "original_images",
+                "type": "IMAGE",
+                "link": 325
+              },
+              {
+                "localized_name": "masks",
+                "name": "masks",
+                "type": "MASK",
+                "link": 338
+              }
+            ],
+            "outputs": [
+              {
+                "localized_name": "original_images",
+                "name": "original_images",
+                "type": "IMAGE",
+                "links": [
+                  108
+                ]
+              },
+              {
+                "localized_name": "cropped_images",
+                "name": "cropped_images",
+                "type": "IMAGE",
+                "links": []
+              },
+              {
+                "localized_name": "cropped_masks",
+                "name": "cropped_masks",
+                "type": "MASK",
+                "links": [
+                  111
+                ]
+              },
+              {
+                "localized_name": "combined_crop_image",
+                "name": "combined_crop_image",
+                "type": "IMAGE",
+                "links": [
+                  115,
+                  141,
+                  149
+                ]
+              },
+              {
+                "localized_name": "combined_crop_masks",
+                "name": "combined_crop_masks",
+                "type": "MASK",
+                "links": [
+                  112,
+                  116,
+                  156
+                ]
+              },
+              {
+                "localized_name": "bboxes",
+                "name": "bboxes",
+                "type": "BBOX",
+                "links": [
+                  113
+                ]
+              },
+              {
+                "localized_name": "combined_bounding_box",
+                "name": "combined_bounding_box",
+                "type": "BBOX",
+                "links": [
+                  114
+                ]
+              },
+              {
+                "localized_name": "bbox_width",
+                "name": "bbox_width",
+                "type": "INT",
+                "links": null
+              },
+              {
+                "localized_name": "bbox_height",
+                "name": "bbox_height",
+                "type": "INT",
+                "links": null
+              }
+            ],
+            "properties": {
+              "cnr_id": "comfyui-kjnodes",
+              "ver": "1.2.0",
+              "Node name for S&R": "BatchCropFromMaskAdvanced"
+            },
+            "widgets_values": [
+              1,
+              0.7
+            ]
+          },
+          {
+            "id": 107,
+            "type": "GetImageRangeFromBatch",
+            "pos": [
+              1501.5484993150317,
+              617.5358016059444
+            ],
+            "size": [
+              316.5806700303996,
+              107.10040895641089
+            ],
+            "flags": {},
+            "order": 31,
+            "mode": 0,
+            "inputs": [
+              {
+                "localized_name": "images",
+                "name": "images",
+                "shape": 7,
+                "type": "IMAGE",
+                "link": null
+              },
+              {
+                "localized_name": "masks",
+                "name": "masks",
+                "shape": 7,
+                "type": "MASK",
+                "link": 322
+              },
+              {
+                "localized_name": "start_index",
+                "name": "start_index",
+                "type": "INT",
+                "widget": {
+                  "name": "start_index"
+                },
+                "link": 315
+              }
+            ],
+            "outputs": [
+              {
+                "localized_name": "IMAGE",
+                "name": "IMAGE",
+                "type": "IMAGE",
+                "links": null
+              },
+              {
+                "localized_name": "MASK",
+                "name": "MASK",
+                "type": "MASK",
+                "links": [
+                  335
+                ]
+              }
+            ],
+            "properties": {
+              "cnr_id": "comfyui-kjnodes",
+              "ver": "1.2.0",
+              "Node name for S&R": "GetImageRangeFromBatch"
+            },
+            "widgets_values": [
+              0,
+              1
+            ]
+          },
+          {
+            "id": 112,
+            "type": "GrowMask",
+            "pos": [
+              1832.6544005369121,
+              627.4390507940712
+            ],
+            "size": [
+              270,
+              82
+            ],
+            "flags": {},
+            "order": 33,
+            "mode": 0,
+            "inputs": [
+              {
+                "localized_name": "mask",
+                "name": "mask",
+                "type": "MASK",
+                "link": 335
+              },
+              {
+                "localized_name": "expand",
+                "name": "expand",
+                "type": "INT",
+                "widget": {
+                  "name": "expand"
+                },
+                "link": 337
+              }
+            ],
+            "outputs": [
+              {
+                "localized_name": "MASK",
+                "name": "MASK",
+                "type": "MASK",
+                "links": [
+                  336,
+                  338
+                ]
+              }
+            ],
+            "properties": {
+              "cnr_id": "comfy-core",
+              "ver": "0.6.0",
+              "Node name for S&R": "GrowMask"
+            },
+            "widgets_values": [
+              4,
+              true
+            ]
           }
         ],
         "groups": [
@@ -7349,10 +7521,10 @@
             "id": 7,
             "title": "2) Loop Images (Open Loop)",
             "bounding": [
-              1306.921595230666,
-              493.49471264292293,
-              895.0832254536285,
-              264.01187847189266
+              984.6107628267731,
+              499.2371067929187,
+              1153.3501110261582,
+              261.389879633593
             ],
             "color": "#a1309b",
             "font_size": 24,
@@ -7448,14 +7620,6 @@
             "target_id": 39,
             "target_slot": 0,
             "type": "IMAGE"
-          },
-          {
-            "id": 316,
-            "origin_id": 107,
-            "origin_slot": 1,
-            "target_id": 39,
-            "target_slot": 1,
-            "type": "MASK"
           },
           {
             "id": 116,
@@ -7656,14 +7820,6 @@
             "target_id": 95,
             "target_slot": 0,
             "type": "IMAGE"
-          },
-          {
-            "id": 323,
-            "origin_id": 107,
-            "origin_slot": 1,
-            "target_id": 95,
-            "target_slot": 1,
-            "type": "MASK"
           },
           {
             "id": 66,
@@ -7936,6 +8092,38 @@
             "target_id": 40,
             "target_slot": 1,
             "type": "IMAGE"
+          },
+          {
+            "id": 335,
+            "origin_id": 107,
+            "origin_slot": 1,
+            "target_id": 112,
+            "target_slot": 0,
+            "type": "MASK"
+          },
+          {
+            "id": 336,
+            "origin_id": 112,
+            "origin_slot": 0,
+            "target_id": 95,
+            "target_slot": 1,
+            "type": "MASK"
+          },
+          {
+            "id": 337,
+            "origin_id": -10,
+            "origin_slot": 4,
+            "target_id": 112,
+            "target_slot": 1,
+            "type": "INT"
+          },
+          {
+            "id": 338,
+            "origin_id": 112,
+            "origin_slot": 0,
+            "target_id": 39,
+            "target_slot": 1,
+            "type": "MASK"
           }
         ],
         "extra": {
@@ -7947,10 +8135,10 @@
   "config": {},
   "extra": {
     "ds": {
-      "scale": 0.6303940863128605,
+      "scale": 0.6303940863128616,
       "offset": [
-        -341.86219468626587,
-        111.50837223053391
+        -928.1295775034616,
+        0.7321221611583999
       ]
     },
     "frontendVersion": "1.35.9",
