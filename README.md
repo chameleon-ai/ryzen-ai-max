@@ -341,7 +341,7 @@ Check out these various custom [workflows](https://github.com/chameleon-ai/ryzen
 
 ![i2v workflow](/assets/workflows/i2v.png)
 
-[Wan 2.2 i2v workflow](/workflows/framework-wan-i2v.json)
+Link: [Wan 2.2 i2v workflow](https://github.com/chameleon-ai/ryzen-ai-max/blob/main/assets/workflows/framework-wan-i2v.json)
 - Uses the fp8 weights of [Wan 2.2](https://huggingface.co/Comfy-Org/Wan_2.2_ComfyUI_Repackaged) which use 20+ GB VRAM
 - Uses [QwenVL](https://github.com/1038lab/ComfyUI-QwenVL) to auto-prompt for the input image
 - Uses [4x-AnimeSharp](https://huggingface.co/utnah/esrgan/blob/main/4x-AnimeSharp.pth) to upscale the output video. Probably not the best method but it's pretty efficient (I'm still investigating superior upscale methods).
@@ -350,7 +350,7 @@ Check out these various custom [workflows](https://github.com/chameleon-ai/ryzen
 ### Refine by Segment
 ![refine workflow](/assets/workflows/refine.png)
 
-[Refine by Segment Subgraph](/workflows/framework-refine-by-segment.json)
+Link: [Refine by Segment Subgraph](https://github.com/chameleon-ai/ryzen-ai-max/blob/main/assets/workflows/framework-refine-by-segment.json)
 - Uses [SAM3](https://github.com/wouterverweirder/comfyui_sam3) to identify segments to individually refine
   - Note that you need to manually download the [sam3 model](https://huggingface.co/1038lab/sam3/resolve/main/sam3.pt) and place it in `models/sam3/sam3.pt`
 - Uses [QwenVL](https://github.com/1038lab/ComfyUI-QwenVL) to auto-prompt for the visual elements of each segment
@@ -360,7 +360,7 @@ Check out these various custom [workflows](https://github.com/chameleon-ai/ryzen
 ### NetaYume Lumina
 ![lumina workflow](/assets/workflows/lumina.png)
 
-[NetaYume Lumina Workflow](/workflows/framework-netalumina-sdxl-t2i.json)
+Link: [NetaYume Lumina Workflow](https://github.com/chameleon-ai/ryzen-ai-max/blob/main/assets/workflows/framework-netalumina-sdxl-t2i.json)
 - An implementation of [NetaYume Lumina](https://huggingface.co/duongve/NetaYume-Lumina-Image-2.0) text-to-image
 - Uses [LLM Party](https://github.com/heshengtao/comfyui_LLM_party) to condition the lumina prompt into a Stable Diffusion prompt and refines the image using SDXL
 - Uses the above Refine By Segment subgraph
