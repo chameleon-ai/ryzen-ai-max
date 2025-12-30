@@ -363,7 +363,6 @@ Link: [Refine by Segment Subgraph](https://github.com/chameleon-ai/ryzen-ai-max/
 Link: [NetaYume Lumina Workflow](https://github.com/chameleon-ai/ryzen-ai-max/blob/main/assets/workflows/framework-netalumina-sdxl-t2i.json)
 - An implementation of [NetaYume Lumina](https://huggingface.co/duongve/NetaYume-Lumina-Image-2.0) text-to-image
 - Uses [LLM Party](https://github.com/heshengtao/comfyui_LLM_party) to condition the lumina prompt into a Stable Diffusion prompt and refines the image using SDXL
-- Uses the above Refine By Segment subgraph
 
 ## Koboldcpp Settings
 - Use [koboldcpp-rocm](https://github.com/YellowRoseCx/koboldcpp-rocm), build from source or install the [koboldcpp-hipblas](https://aur.archlinux.org/packages/koboldcpp-hipblas) AUR package
