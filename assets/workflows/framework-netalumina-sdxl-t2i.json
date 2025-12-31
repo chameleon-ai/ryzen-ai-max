@@ -81,7 +81,7 @@
       "title": "Models",
       "properties": {},
       "widgets_values": [
-        "## Lumina Model:\n[NetaYume Lumina](https://huggingface.co/duongve/NetaYume-Lumina-Image-2.0)\\\n[v4 all in one](https://huggingface.co/duongve/NetaYume-Lumina-Image-2.0/resolve/main/NetaYume_v4_all_in_one.safetensors)\\\nPlace it in `models/checkpoints`\n\n## Stable Diffusion XL Model:\nUse your favorite. I'm using [TSRMix v5.0](https://civitai.com/models/2013051/tsrmix). Place it in `models/checkpoints`\\\nNote that this workflow also explicitly uses the [SDXL VAE](https://huggingface.co/stabilityai/sdxl-vae/resolve/main/sdxl_vae.safetensors) separate from the model. Place it in `models/vae`\n\n\n## Local LLM options:\nThe model can be located anywhere on the filesystem, use a fully qualified path.\n\n- BlackSheep-Llama3.2-3B, [full weights](https://huggingface.co/TroyDoesAI/BlackSheep-Llama3.2-3B) or [GGUF](https://huggingface.co/mradermacher/BlackSheep-Llama3.2-3B-GGUF)\n\n- IceAbsintheNeatRP-7b, [full weights](https://huggingface.co/icefog72/IceAbsintheNeatRP-7b) or [GGUF](https://huggingface.co/mradermacher/IceAbsintheNeatRP-7b-GGUF)\n\nCheck out the [UGI Leaderboard](https://huggingface.co/spaces/DontPlanToEnd/UGI-Leaderboard) for recent models and look for ones that rank highly on style adherence. I've tried things like GPT OSS, but it being a thinking model, it outputs a lot of thinking text before getting to the prompt, but simple roleplay models tend to obey the system command to output only a comma delimited list of tags, even if they're not the smartest.\n\nI had difficulty with [LLM Party](https://github.com/heshengtao/comfyui_LLM_party) nodes. The full weights appear to have a memory leak and the GGUF nodes seem to only want to do CPU inference. However, the [f16](https://huggingface.co/mradermacher/BlackSheep-Llama3.2-3B-GGUF/resolve/main/BlackSheep-Llama3.2-3B.f16.gguf) quant of the 3B model loads and runs in about 5 seconds, so it's not a problem. I had difficulties using larger models in the 24B size range.\n\n## SAM3\n\nThe \"Refine by Segment\" subgraphs use [SAM3](https://github.com/wouterverweirder/comfyui_sam3) to select segments to further refine. You can define anything you want in the `prompt` section and it will serially process all generated segments.\n\nThe node tries to download the sam3 module if it doesn't exist, but it tries to download from [the official facebook release](https://huggingface.co/facebook/sam3/tree/main) which requires authentication.\n\nHowever, you can manually download the [checkpoint](https://huggingface.co/1038lab/sam3/resolve/main/sam3.pt) mirror from [1038 lab](https://huggingface.co/1038lab/sam3/tree/main) and place it in `models/sam3/sam3.pt`"
+        "## Lumina Model:\n[NetaYume Lumina](https://huggingface.co/duongve/NetaYume-Lumina-Image-2.0)\\\n[v4 all in one](https://huggingface.co/duongve/NetaYume-Lumina-Image-2.0/resolve/main/NetaYume_v4_all_in_one.safetensors)\\\nPlace it in `models/checkpoints`\n\n## Stable Diffusion XL Model:\nUse your favorite. I'm using [TSRMix v5.0](https://civitai.com/models/2013051/tsrmix). Place it in `models/checkpoints`\\\nNote that this workflow also explicitly uses the [SDXL VAE](https://huggingface.co/stabilityai/sdxl-vae/resolve/main/sdxl_vae.safetensors) separate from the model. Place it in `models/vae`\n\n\n## Local LLM options:\n\n*Strictly speaking, the LLM Party node is not needed. It's used to convert the plain English prompt into a list of comma separated tags for SDXL. This section can be omitted and a manual prompt can be used.*\n\nThe model can be located anywhere on the filesystem, use a fully qualified path.\n\n- BlackSheep-Llama3.2-3B, [full weights](https://huggingface.co/TroyDoesAI/BlackSheep-Llama3.2-3B) or [GGUF](https://huggingface.co/mradermacher/BlackSheep-Llama3.2-3B-GGUF)\n\n- IceAbsintheNeatRP-7b, [full weights](https://huggingface.co/icefog72/IceAbsintheNeatRP-7b) or [GGUF](https://huggingface.co/mradermacher/IceAbsintheNeatRP-7b-GGUF)\n\nCheck out the [UGI Leaderboard](https://huggingface.co/spaces/DontPlanToEnd/UGI-Leaderboard) for recent models and look for ones that rank highly on style adherence. I've tried things like GPT OSS, but it being a thinking model, it outputs a lot of thinking text before getting to the prompt, but simple roleplay models tend to obey the system command to output only a comma delimited list of tags, even if they're not the smartest.\n\nI had difficulty with [LLM Party](https://github.com/heshengtao/comfyui_LLM_party) nodes. The full weights appear to have a memory leak and the GGUF nodes seem to only want to do CPU inference. However, the [f16](https://huggingface.co/mradermacher/BlackSheep-Llama3.2-3B-GGUF/resolve/main/BlackSheep-Llama3.2-3B.f16.gguf) quant of the 3B model loads and runs in about 5 seconds, so it's not a problem. I had difficulties using larger models in the 24B size range."
       ],
       "color": "#432",
       "bgcolor": "#653"
@@ -264,14 +264,14 @@
         "ver": "0.6.0"
       },
       "widgets_values": [
-        "A woman in a wizard hat is looking into a glowing crystal ball. She has an enamoured expression as her eyes light up with excitement while looking downward into the ball. The witch has black hair and red eyes.\nShe has pale skin, black lipstick, black mascara, and black nails. She has a black choker inlaid with a red crystal.\n\nThe setting is a moody dark indoor parlor with velvet curtains and a fancy table. Underlighting and three quarters view.",
+        "Character: Lum (Ususei Yatsura)\nLum is flying through the air. She has orange eyes, aqua hair, and small horns. She is wearing a tiger-stripe bikini and tiger-stripe go-go boots. With one hand she is doing the peace gesture (v gesture) and is looking at the viewer.\nIn the background is a cheery blue sky.\nStyle: modern full color anime illustration\nQuality: High quality, high resolution, detailed",
         "NetaYume_v4_all_in_one.safetensors",
         24,
-        4,
-        0.45,
+        5,
+        0.55,
         "tsrmix_v50.safetensors",
         32,
-        0.48,
+        0.5,
         4
       ],
       "color": "#232",
@@ -822,8 +822,8 @@
               "Node name for S&R": "EmptySD3LatentImage"
             },
             "widgets_values": [
-              1168,
-              864,
+              896,
+              1360,
               1
             ]
           },
@@ -860,7 +860,7 @@
               "Node name for S&R": "PrimitiveInt"
             },
             "widgets_values": [
-              -778739506942054,
+              961057292685621,
               "randomize"
             ]
           },
@@ -957,13 +957,13 @@
               "Node name for S&R": "KSampler"
             },
             "widgets_values": [
-              31693974025964,
+              867336088221278,
               "randomize",
-              4,
+              5,
               4,
               "res_multistep",
               "simple",
-              0.45
+              0.55
             ]
           },
           {
@@ -1009,7 +1009,7 @@
               "Node name for S&R": "PrimitiveStringMultiline"
             },
             "widgets_values": [
-              "A woman in a wizard hat is looking into a glowing crystal ball. She has an enamoured expression as her eyes light up with excitement while looking downward into the ball. The witch has black hair and red eyes.\nShe has pale skin, black lipstick, black mascara, and black nails. She has a black choker inlaid with a red crystal.\n\nThe setting is a moody dark indoor parlor with velvet curtains and a fancy table. Underlighting and three quarters view."
+              "Character: Lum (Ususei Yatsura)\nLum is flying through the air. She has orange eyes, aqua hair, and small horns. She is wearing a tiger-stripe bikini and tiger-stripe go-go boots. With one hand she is doing the peace gesture (v gesture) and is looking at the viewer.\nIn the background is a cheery blue sky.\nStyle: modern full color anime illustration\nQuality: High quality, high resolution, detailed"
             ],
             "color": "#232",
             "bgcolor": "#353"
@@ -1222,13 +1222,13 @@
               "Node name for S&R": "KSampler"
             },
             "widgets_values": [
-              733893958406550,
+              435648451897288,
               "randomize",
               32,
               6,
               "dpmpp_3m_sde",
               "karras",
-              0.48
+              0.5
             ]
           },
           {
@@ -1279,29 +1279,6 @@
             ]
           },
           {
-            "id": 57,
-            "type": "Note",
-            "pos": [
-              2319.8046315514634,
-              338.47929434556227
-            ],
-            "size": [
-              235.6714831026261,
-              169.6597226534646
-            ],
-            "flags": {},
-            "order": 5,
-            "mode": 0,
-            "inputs": [],
-            "outputs": [],
-            "properties": {},
-            "widgets_values": [
-              "The default setting of 4 steps is supposed to produce an image that still looks rough around the edges. The function of this phase is to only minimally process the upscaled image to prepare for refining. SDXL will smooth out the details."
-            ],
-            "color": "#432",
-            "bgcolor": "#653"
-          },
-          {
             "id": 58,
             "type": "Note",
             "pos": [
@@ -1346,133 +1323,6 @@
             ],
             "color": "#432",
             "bgcolor": "#653"
-          },
-          {
-            "id": 50,
-            "type": "LLM_local",
-            "pos": [
-              1687.8150403892776,
-              1072.9920571404173
-            ],
-            "size": [
-              1029.1482681610084,
-              706.7785462797142
-            ],
-            "flags": {},
-            "order": 28,
-            "mode": 0,
-            "inputs": [
-              {
-                "localized_name": "model",
-                "name": "model",
-                "type": "CUSTOM",
-                "link": 88
-              },
-              {
-                "localized_name": "tokenizer",
-                "name": "tokenizer",
-                "shape": 7,
-                "type": "CUSTOM",
-                "link": null
-              },
-              {
-                "localized_name": "image",
-                "name": "image",
-                "shape": 7,
-                "type": "IMAGE",
-                "link": null
-              },
-              {
-                "localized_name": "system_prompt_input",
-                "name": "system_prompt_input",
-                "shape": 7,
-                "type": "STRING",
-                "link": null
-              },
-              {
-                "localized_name": "user_prompt_input",
-                "name": "user_prompt_input",
-                "shape": 7,
-                "type": "STRING",
-                "link": 72
-              },
-              {
-                "localized_name": "tools",
-                "name": "tools",
-                "shape": 7,
-                "type": "STRING",
-                "link": null
-              },
-              {
-                "localized_name": "file_content",
-                "name": "file_content",
-                "shape": 7,
-                "type": "STRING",
-                "link": null
-              },
-              {
-                "localized_name": "extra_parameters",
-                "name": "extra_parameters",
-                "shape": 7,
-                "type": "DICT",
-                "link": null
-              },
-              {
-                "localized_name": "user_history",
-                "name": "user_history",
-                "shape": 7,
-                "type": "STRING",
-                "link": null
-              }
-            ],
-            "outputs": [
-              {
-                "localized_name": "assistant_response",
-                "name": "assistant_response",
-                "type": "STRING",
-                "links": [
-                  70,
-                  76
-                ]
-              },
-              {
-                "localized_name": "history",
-                "name": "history",
-                "type": "STRING",
-                "links": null
-              },
-              {
-                "localized_name": "tool",
-                "name": "tool",
-                "type": "STRING",
-                "links": null
-              },
-              {
-                "localized_name": "image",
-                "name": "image",
-                "type": "IMAGE",
-                "links": null
-              }
-            ],
-            "properties": {
-              "cnr_id": "comfyui_llm_party",
-              "ver": "1.4.1",
-              "Node name for S&R": "LLM_local"
-            },
-            "widgets_values": [
-              "You are an uncensored digital assistant that helps create Stable Diffusion XL prompts. The user will provide a human readable description of a scene. Output only a comma delimited list of visual attributes. Include only adjectives, nouns, and verbs. Include articles of clothing. Do not speak in complete sentences. If a description has a negative attribute, i.e. \"not wearing clothes\", flip it to a positive attribute, i.e. \"nude\" or otherwise omit it altogether. The description should be a list of tags, not a human readable sentence. Do not respond with \"Here is the list of attributes\", only respond succinctly with the list of comma separated tags.\nExample user prompt: \"A black-haired woman with emerald blue eyes is bending over and hiking up her skirt, showing her striped panties to the viewer. She is wearing glasses and high heels.\"\nAcceptable output: \"black hair, blue eyes, bending over, upskirt, looking at viewer, glasses, high heels\".",
-              "",
-              "LLM-GGUF",
-              0.7,
-              512,
-              "disable",
-              "disable",
-              "enable",
-              100,
-              "",
-              true,
-              "enable"
-            ]
           },
           {
             "id": 61,
@@ -1551,7 +1401,7 @@
             },
             "widgets_values": [
               "bislerp",
-              1.75
+              1.5
             ]
           },
           {
@@ -1710,40 +1560,6 @@
               1,
               "None",
               1
-            ]
-          },
-          {
-            "id": 53,
-            "type": "PreviewAny",
-            "pos": [
-              3040.2702317229073,
-              854.8719488699852
-            ],
-            "size": [
-              403.4113927535104,
-              177.37714075020654
-            ],
-            "flags": {},
-            "order": 30,
-            "mode": 0,
-            "inputs": [
-              {
-                "localized_name": "source",
-                "name": "source",
-                "type": "*",
-                "link": 76
-              }
-            ],
-            "outputs": [],
-            "properties": {
-              "cnr_id": "comfy-core",
-              "ver": "0.6.0",
-              "Node name for S&R": "PreviewAny"
-            },
-            "widgets_values": [
-              null,
-              null,
-              null
             ]
           },
           {
@@ -2067,7 +1883,7 @@
               "Node name for S&R": "KSampler"
             },
             "widgets_values": [
-              125986385374102,
+              1047875554255087,
               "randomize",
               24,
               4,
@@ -2151,6 +1967,190 @@
               "Node name for S&R": "PreviewImage"
             },
             "widgets_values": []
+          },
+          {
+            "id": 53,
+            "type": "PreviewAny",
+            "pos": [
+              3040.2702317229073,
+              854.8719488699852
+            ],
+            "size": [
+              403.4113927535104,
+              177.37714075020654
+            ],
+            "flags": {},
+            "order": 30,
+            "mode": 0,
+            "inputs": [
+              {
+                "localized_name": "source",
+                "name": "source",
+                "type": "*",
+                "link": 76
+              }
+            ],
+            "outputs": [],
+            "properties": {
+              "cnr_id": "comfy-core",
+              "ver": "0.6.0",
+              "Node name for S&R": "PreviewAny"
+            },
+            "widgets_values": [
+              null,
+              null,
+              null
+            ]
+          },
+          {
+            "id": 50,
+            "type": "LLM_local",
+            "pos": [
+              1687.8150403892776,
+              1072.9920571404173
+            ],
+            "size": [
+              1029.1482681610084,
+              706.7785462797142
+            ],
+            "flags": {},
+            "order": 28,
+            "mode": 0,
+            "inputs": [
+              {
+                "localized_name": "model",
+                "name": "model",
+                "type": "CUSTOM",
+                "link": 88
+              },
+              {
+                "localized_name": "tokenizer",
+                "name": "tokenizer",
+                "shape": 7,
+                "type": "CUSTOM",
+                "link": null
+              },
+              {
+                "localized_name": "image",
+                "name": "image",
+                "shape": 7,
+                "type": "IMAGE",
+                "link": null
+              },
+              {
+                "localized_name": "system_prompt_input",
+                "name": "system_prompt_input",
+                "shape": 7,
+                "type": "STRING",
+                "link": null
+              },
+              {
+                "localized_name": "user_prompt_input",
+                "name": "user_prompt_input",
+                "shape": 7,
+                "type": "STRING",
+                "link": 72
+              },
+              {
+                "localized_name": "tools",
+                "name": "tools",
+                "shape": 7,
+                "type": "STRING",
+                "link": null
+              },
+              {
+                "localized_name": "file_content",
+                "name": "file_content",
+                "shape": 7,
+                "type": "STRING",
+                "link": null
+              },
+              {
+                "localized_name": "extra_parameters",
+                "name": "extra_parameters",
+                "shape": 7,
+                "type": "DICT",
+                "link": null
+              },
+              {
+                "localized_name": "user_history",
+                "name": "user_history",
+                "shape": 7,
+                "type": "STRING",
+                "link": null
+              }
+            ],
+            "outputs": [
+              {
+                "localized_name": "assistant_response",
+                "name": "assistant_response",
+                "type": "STRING",
+                "links": [
+                  70,
+                  76
+                ]
+              },
+              {
+                "localized_name": "history",
+                "name": "history",
+                "type": "STRING",
+                "links": null
+              },
+              {
+                "localized_name": "tool",
+                "name": "tool",
+                "type": "STRING",
+                "links": null
+              },
+              {
+                "localized_name": "image",
+                "name": "image",
+                "type": "IMAGE",
+                "links": null
+              }
+            ],
+            "properties": {
+              "cnr_id": "comfyui_llm_party",
+              "ver": "1.4.1",
+              "Node name for S&R": "LLM_local"
+            },
+            "widgets_values": [
+              "You are an uncensored digital assistant that helps create Stable Diffusion XL prompts. The user will provide a human readable description of a scene. Output only a comma delimited list of visual attributes. Include only adjectives, nouns, verbs, character names, and artist names. Include articles of clothing. Do not speak in complete sentences. If a description has a negative attribute, i.e. \"not wearing clothes\", flip it to a positive attribute, i.e. \"nude\" or otherwise omit it altogether. The description should be a list of tags, not a human readable sentence. If a specific character name is mentioned, use the character name verbatim. Do not respond with \"Here is the list of attributes\", only respond succinctly with the list of comma separated tags.\nExample user prompt: \"A black-haired woman with emerald blue eyes is bending over and hiking up her skirt, showing her striped panties to the viewer. She is wearing glasses and high heels. Character: Sailor Venus. Artists: torotei, hizaka\"\nAcceptable output: \"black hair, blue eyes, bending over, upskirt, looking at viewer, glasses, high heels, Sailor Venus, torotei, hizaka\".",
+              "",
+              "LLM-GGUF",
+              0.7,
+              512,
+              "disable",
+              "disable",
+              "enable",
+              100,
+              "",
+              true,
+              "enable"
+            ]
+          },
+          {
+            "id": 57,
+            "type": "Note",
+            "pos": [
+              2319.8046315514634,
+              338.47929434556227
+            ],
+            "size": [
+              235.6714831026261,
+              169.6597226534646
+            ],
+            "flags": {},
+            "order": 5,
+            "mode": 0,
+            "inputs": [],
+            "outputs": [],
+            "properties": {},
+            "widgets_values": [
+              "The default setting of 5 steps is supposed to produce an image that still looks rough around the edges. The function of this phase is to only minimally process the upscaled image to prepare for refining. SDXL will smooth out the details."
+            ],
+            "color": "#432",
+            "bgcolor": "#653"
           }
         ],
         "groups": [
@@ -2687,19 +2687,19 @@
   },
   "config": {},
   "extra": {
-    "ds": {
-      "scale": 0.8390545288824178,
-      "offset": [
-        -411.27076838266703,
-        572.9496363686168
-      ]
-    },
     "frontendVersion": "1.35.9",
     "workflowRendererVersion": "LG",
     "VHS_latentpreview": false,
     "VHS_latentpreviewrate": 0,
     "VHS_MetadataImage": true,
-    "VHS_KeepIntermediate": true
+    "VHS_KeepIntermediate": true,
+    "ds": {
+      "scale": 0.8390545288824294,
+      "offset": [
+        -292.24336501758603,
+        617.4857355686003
+      ]
+    }
   },
   "version": 0.4
 }
