@@ -297,7 +297,7 @@
         "state": {
           "lastGroupId": 9,
           "lastNodeId": 64,
-          "lastLinkId": 96,
+          "lastLinkId": 97,
           "lastRerouteId": 0
         },
         "revision": 0,
@@ -1013,36 +1013,6 @@
             ],
             "color": "#232",
             "bgcolor": "#353"
-          },
-          {
-            "id": 54,
-            "type": "PreviewImage",
-            "pos": [
-              2627.252485671905,
-              -335.55618243911863
-            ],
-            "size": [
-              965.9804184649925,
-              579.0712547194132
-            ],
-            "flags": {},
-            "order": 31,
-            "mode": 0,
-            "inputs": [
-              {
-                "localized_name": "images",
-                "name": "images",
-                "type": "IMAGE",
-                "link": 79
-              }
-            ],
-            "outputs": [],
-            "properties": {
-              "cnr_id": "comfy-core",
-              "ver": "0.6.0",
-              "Node name for S&R": "PreviewImage"
-            },
-            "widgets_values": []
           },
           {
             "id": 45,
@@ -1929,8 +1899,7 @@
                 "type": "IMAGE",
                 "slot_index": 0,
                 "links": [
-                  74,
-                  79
+                  74
                 ]
               }
             ],
@@ -2119,7 +2088,7 @@
               46
             ],
             "flags": {},
-            "order": 34,
+            "order": 33,
             "mode": 0,
             "inputs": [
               {
@@ -2142,7 +2111,7 @@
                 "type": "IMAGE",
                 "slot_index": 0,
                 "links": [
-                  96
+                  97
                 ]
               }
             ],
@@ -2154,39 +2123,34 @@
             "widgets_values": []
           },
           {
-            "id": 63,
-            "type": "CatboxAnonSaveImageStealth",
+            "id": 54,
+            "type": "PreviewImage",
             "pos": [
-              1938.177915747154,
-              -304.84147154285256
+              1921.6964346384698,
+              -300.9934704797098
             ],
             "size": [
-              479.1044073544231,
-              416.97777285193285
+              509.51425707004864,
+              420.5595067676443
             ],
             "flags": {},
-            "order": 33,
+            "order": 31,
             "mode": 0,
             "inputs": [
               {
                 "localized_name": "images",
                 "name": "images",
                 "type": "IMAGE",
-                "link": 96
+                "link": 97
               }
             ],
             "outputs": [],
             "properties": {
-              "cnr_id": "comfyui_stealth_pnginfo",
-              "ver": "1.1.4",
-              "Node name for S&R": "CatboxAnonSaveImageStealth"
+              "cnr_id": "comfy-core",
+              "ver": "0.6.0",
+              "Node name for S&R": "PreviewImage"
             },
-            "widgets_values": [
-              "Lumina",
-              "alpha",
-              true,
-              false
-            ]
+            "widgets_values": []
           }
         ],
         "groups": [
@@ -2603,14 +2567,6 @@
             "type": "IMAGE"
           },
           {
-            "id": 79,
-            "origin_id": 8,
-            "origin_slot": 0,
-            "target_id": 54,
-            "target_slot": 0,
-            "type": "IMAGE"
-          },
-          {
             "id": 81,
             "origin_id": -10,
             "origin_slot": 5,
@@ -2715,10 +2671,10 @@
             "type": "LATENT"
           },
           {
-            "id": 96,
+            "id": 97,
             "origin_id": 64,
             "origin_slot": 0,
-            "target_id": 63,
+            "target_id": 54,
             "target_slot": 0,
             "type": "IMAGE"
           }
