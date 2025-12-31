@@ -21,6 +21,7 @@
     - [Wan i2v](#wan-i2v)
     - [Refine by Segment](#refine-by-segment)
     - [NetaYume Lumina](#netayume-lumina)
+    - [Newbie Lumina](#newbie-lumina)
   - [Koboldcpp Settings](#koboldcpp-settings)
 
 # Setup
@@ -362,6 +363,14 @@ Link: [Refine by Segment Subgraph](https://github.com/chameleon-ai/ryzen-ai-max/
 
 Link: [NetaYume Lumina Workflow](https://github.com/chameleon-ai/ryzen-ai-max/blob/main/assets/workflows/framework-netalumina-sdxl-t2i.json)
 - An implementation of [NetaYume Lumina](https://huggingface.co/duongve/NetaYume-Lumina-Image-2.0) text-to-image
+- Uses [LLM Party](https://github.com/heshengtao/comfyui_LLM_party) to condition the lumina prompt into a Stable Diffusion prompt and refines the image using SDXL
+
+### Newbie Lumina
+![lumina workflow](/assets/workflows/newbie.png)
+
+Link: [Newbie Workflow](https://github.com/chameleon-ai/ryzen-ai-max/blob/main/assets/workflows/framework-newbieimage-sdxl-t2i.json)
+- An implementation of [Newbie Exp0.1](https://huggingface.co/NewBie-AI/NewBie-image-Exp0.1) text-to-image
+- Uses a modified CLIP input that enables plain-text prompting instead of having to format the prompt as XML per the template workflow
 - Uses [LLM Party](https://github.com/heshengtao/comfyui_LLM_party) to condition the lumina prompt into a Stable Diffusion prompt and refines the image using SDXL
 
 ## Koboldcpp Settings
