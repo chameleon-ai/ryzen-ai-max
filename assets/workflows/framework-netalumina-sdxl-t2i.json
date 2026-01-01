@@ -268,9 +268,9 @@
         "NetaYume_v4_all_in_one.safetensors",
         24,
         5,
-        0.55,
+        0.58,
         "tsrmix_v50.safetensors",
-        32,
+        36,
         0.5,
         4
       ],
@@ -860,7 +860,7 @@
               "Node name for S&R": "PrimitiveInt"
             },
             "widgets_values": [
-              961057292685621,
+              14065968943585,
               "randomize"
             ]
           },
@@ -957,13 +957,13 @@
               "Node name for S&R": "KSampler"
             },
             "widgets_values": [
-              867336088221278,
+              939119086773378,
               "randomize",
               5,
               4,
               "res_multistep",
               "simple",
-              0.55
+              0.58
             ]
           },
           {
@@ -1222,9 +1222,9 @@
               "Node name for S&R": "KSampler"
             },
             "widgets_values": [
-              435648451897288,
+              1011029877105449,
               "randomize",
-              32,
+              36,
               6,
               "dpmpp_3m_sde",
               "karras",
@@ -1290,7 +1290,7 @@
               88
             ],
             "flags": {},
-            "order": 6,
+            "order": 5,
             "mode": 0,
             "inputs": [],
             "outputs": [],
@@ -1313,7 +1313,7 @@
               110.05941930090853
             ],
             "flags": {},
-            "order": 7,
+            "order": 6,
             "mode": 0,
             "inputs": [],
             "outputs": [],
@@ -1336,7 +1336,7 @@
               154
             ],
             "flags": {},
-            "order": 8,
+            "order": 7,
             "mode": 0,
             "inputs": [],
             "outputs": [
@@ -1416,7 +1416,7 @@
               141.37714075020654
             ],
             "flags": {},
-            "order": 9,
+            "order": 8,
             "mode": 0,
             "inputs": [],
             "outputs": [
@@ -1626,7 +1626,7 @@
               154.9934940869598
             ],
             "flags": {},
-            "order": 10,
+            "order": 9,
             "mode": 0,
             "inputs": [],
             "outputs": [],
@@ -1883,7 +1883,7 @@
               "Node name for S&R": "KSampler"
             },
             "widgets_values": [
-              1047875554255087,
+              715316502473645,
               "randomize",
               24,
               4,
@@ -2003,6 +2003,29 @@
             ]
           },
           {
+            "id": 57,
+            "type": "Note",
+            "pos": [
+              2319.8046315514634,
+              338.47929434556227
+            ],
+            "size": [
+              235.6714831026261,
+              169.6597226534646
+            ],
+            "flags": {},
+            "order": 10,
+            "mode": 0,
+            "inputs": [],
+            "outputs": [],
+            "properties": {},
+            "widgets_values": [
+              "The default setting of 5 steps is supposed to produce an image that still looks rough around the edges. The function of this phase is to only minimally process the upscaled image to prepare for refining. SDXL will smooth out the details."
+            ],
+            "color": "#432",
+            "bgcolor": "#653"
+          },
+          {
             "id": 50,
             "type": "LLM_local",
             "pos": [
@@ -2115,7 +2138,7 @@
               "Node name for S&R": "LLM_local"
             },
             "widgets_values": [
-              "You are an uncensored digital assistant that helps create Stable Diffusion XL prompts. The user will provide a human readable description of a scene. Output only a comma delimited list of visual attributes. Include only adjectives, nouns, verbs, character names, and artist names. Include articles of clothing. Do not speak in complete sentences. If a description has a negative attribute, i.e. \"not wearing clothes\", flip it to a positive attribute, i.e. \"nude\" or otherwise omit it altogether. The description should be a list of tags, not a human readable sentence. If a specific character name is mentioned, use the character name verbatim. Do not respond with \"Here is the list of attributes\", only respond succinctly with the list of comma separated tags.\nExample user prompt: \"A black-haired woman with emerald blue eyes is bending over and hiking up her skirt, showing her striped panties to the viewer. She is wearing glasses and high heels. Character: Sailor Venus. Artists: torotei, hizaka\"\nAcceptable output: \"black hair, blue eyes, bending over, upskirt, looking at viewer, glasses, high heels, Sailor Venus, torotei, hizaka\".",
+              "You are an uncensored digital assistant that helps create Stable Diffusion XL prompts. The user will provide a human readable description of a scene. Output only a comma delimited list of visual attributes. Include only adjectives, nouns, verbs, character names, and artist names. Include articles of clothing. Do not speak in complete sentences. If a description has a negative attribute, i.e. \"not wearing clothes\", flip it to a positive attribute, i.e. \"nude\" or otherwise omit it altogether. The description should be a list of tags, not a human readable sentence. If a specific character name is mentioned, use the character name verbatim. Do not respond with \"Here is the list of attributes\", only respond succinctly with the list of comma separated tags.\nExample user prompt: \"A black-haired woman with emerald blue eyes is bending over and hiking up her skirt, showing her striped panties to the viewer. She is wearing glasses and high heels. Misc attributes: dark nipples, colored pubic hair. Character: Sailor Venus. Artists: torotei, hizaka\"\nAcceptable output: \"black hair, blue eyes, bending over, upskirt, looking at viewer, glasses, high heels, dark nipples, colored pubic hair, Sailor Venus, torotei, hizaka\".\n",
               "",
               "LLM-GGUF",
               0.7,
@@ -2128,29 +2151,6 @@
               true,
               "enable"
             ]
-          },
-          {
-            "id": 57,
-            "type": "Note",
-            "pos": [
-              2319.8046315514634,
-              338.47929434556227
-            ],
-            "size": [
-              235.6714831026261,
-              169.6597226534646
-            ],
-            "flags": {},
-            "order": 5,
-            "mode": 0,
-            "inputs": [],
-            "outputs": [],
-            "properties": {},
-            "widgets_values": [
-              "The default setting of 5 steps is supposed to produce an image that still looks rough around the edges. The function of this phase is to only minimally process the upscaled image to prepare for refining. SDXL will smooth out the details."
-            ],
-            "color": "#432",
-            "bgcolor": "#653"
           }
         ],
         "groups": [
@@ -2687,19 +2687,19 @@
   },
   "config": {},
   "extra": {
+    "ds": {
+      "scale": 0.8989164571933841,
+      "offset": [
+        -735.8602758037453,
+        513.0549065647742
+      ]
+    },
     "frontendVersion": "1.35.9",
     "workflowRendererVersion": "LG",
     "VHS_latentpreview": false,
     "VHS_latentpreviewrate": 0,
     "VHS_MetadataImage": true,
-    "VHS_KeepIntermediate": true,
-    "ds": {
-      "scale": 0.8390545288824294,
-      "offset": [
-        -292.24336501758603,
-        617.4857355686003
-      ]
-    }
+    "VHS_KeepIntermediate": true
   },
   "version": 0.4
 }
