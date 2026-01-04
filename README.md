@@ -361,17 +361,22 @@ Link: [Refine by Segment Subgraph](https://github.com/chameleon-ai/ryzen-ai-max/
 ### NetaYume Lumina
 ![lumina workflow](/assets/workflows/lumina.png)
 
-Link: [NetaYume Lumina Workflow](https://github.com/chameleon-ai/ryzen-ai-max/blob/main/assets/workflows/framework-netalumina-sdxl-t2i.json)
-- An implementation of [NetaYume Lumina](https://huggingface.co/duongve/NetaYume-Lumina-Image-2.0) text-to-image
-- Uses [LLM Party](https://github.com/heshengtao/comfyui_LLM_party) to condition the lumina prompt into a Stable Diffusion prompt and refines the image using SDXL
+An implementation of [NetaYume Lumina](https://huggingface.co/duongve/NetaYume-Lumina-Image-2.0) text-to-image
+
+Links:
+- [Basic Workflow](https://github.com/chameleon-ai/ryzen-ai-max/blob/main/assets/workflows/framework-netalumina-t2i.json) using only ComfyUI builtin nodes.
+- [Advanced Workflow](https://github.com/chameleon-ai/ryzen-ai-max/blob/main/assets/workflows/framework-netalumina-sdxl-t2i.json) using SDXL and [LLM Party](https://github.com/heshengtao/comfyui_LLM_party) to condition the plain English prompt into a Stable Diffusion prompt and refines the image using SDXL
+
 
 ### Newbie Lumina
 ![lumina workflow](/assets/workflows/newbie.png)
 
-Link: [Newbie Workflow](https://github.com/chameleon-ai/ryzen-ai-max/blob/main/assets/workflows/framework-newbieimage-sdxl-t2i.json)
-- An implementation of [Newbie Exp0.1](https://huggingface.co/NewBie-AI/NewBie-image-Exp0.1) text-to-image
-- Uses a modified CLIP input that enables plain-text prompting instead of having to format the prompt as XML per the template workflow
-- Uses [LLM Party](https://github.com/heshengtao/comfyui_LLM_party) to condition the lumina prompt into a Stable Diffusion prompt and refines the image using SDXL
+An implementation of [Newbie Exp0.1](https://huggingface.co/NewBie-AI/NewBie-image-Exp0.1) text-to-image.\
+Uses a modified CLIP input that enables plain-text prompting instead of having to format the prompt as XML per the template workflow
+
+Links:
+- [Basic Workflow](https://github.com/chameleon-ai/ryzen-ai-max/blob/main/assets/workflows/framework-newbieimage-t2i.json) using only ComfyUI builtin nodes.
+- [Advanced Workflow](https://github.com/chameleon-ai/ryzen-ai-max/blob/main/assets/workflows/framework-newbieimage-sdxl-t2i.json) using SDXL and [LLM Party](https://github.com/heshengtao/comfyui_LLM_party) to condition the plain English prompt into a Stable Diffusion prompt and refines the image using SDXL
 
 ## Koboldcpp Settings
 - Use [koboldcpp-rocm](https://github.com/YellowRoseCx/koboldcpp-rocm), build from source or install the [koboldcpp-hipblas](https://aur.archlinux.org/packages/koboldcpp-hipblas) AUR package
